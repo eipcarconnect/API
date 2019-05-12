@@ -1,0 +1,23 @@
+{
+  "name": "api-carconnect",
+  "version": "1.0.0",
+  "description": "The api of the project",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eipcarconnect/API.git"
+  },
+  "author": "Mohan Grewis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eipcarconnect/API/issues"
+  },
+  "homepage": "https://github.com/eipcarconnect/API#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  }
+}
