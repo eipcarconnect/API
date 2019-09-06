@@ -4,6 +4,7 @@ const auth = require('./routes/auth.js')
 const cors = require('cors');
 const port = 3000;
 const config = require('./config/database');
+const mongoose = require('mongoose');
 
 mongoose.connect(config.database, {useNewUrlParser: true});
 
