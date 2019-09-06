@@ -3,6 +3,7 @@ const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/database');
 const uniqid = require('uniqid');
+const bcrypt = require('bcrypt');
 
 /**
  * @api {post} /auth/signup SignUp a new User
@@ -56,28 +57,33 @@ function(req, res) {
 		res.status(400);
 		res.json({success: false, error: 'BodyEmpty'});
 	} else if (!req.body.name || !req.body.email || !req.body.password || !req.body.birthdate) {
+		console.log(req.body);
 		res.status(400);
 		res.json({success: false, error: 'MissingArgument'});
 	} else {
-		console.log("Creating New User");		
-		var newUser = new User({
-			name: req.body.name,
-			email: req.body.email,
-			password: req.body.password,
-			id: uniqid(),
-			birthdate: req.body.birthdate
-		});
+		console.log("Creating New User");
+		bcrypt.hash(req.body.password, 10, function(err, hash) {
+			// Store hash in your password DB.
+			var newUser = new User({
+				name: req.body.name,
+				email: req.body.email,
+				password: hash,
+				id: uniqid(),
+				birthdate: req.body.birthdate
+			});
+			
+			newUser.save(function(err, user) {
+				if (err) {
+					res.status(400);
+					return res.json({success: false, error: 'UserAlreadyExist'});
+				}
+				res.status(200);
+				var token = jwt.sign(user.toJSON(), config.secret);
+				// return the information including token as JSON
+				res.json({ success: true, token: 'JWT ' + token });
+			});
+		  });		
 		
-		newUser.save(function(err, user) {
-			if (err) {
-				res.status(400);
-				return res.json({success: false, error: 'UserAlreadyExist'});
-			}
-			res.status(200);
-			var token = jwt.sign(user.toJSON(), config.secret);
-			// return the information including token as JSON
-			res.json({ success: true, token: 'JWT ' + token });
-		});
 	}
 };
 
