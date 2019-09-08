@@ -63,7 +63,6 @@ function(req, res) {
 	} else {
 		console.log("Creating New User");
 		bcrypt.hash(req.body.password, 10, function(err, hash) {
-			// Store hash in your password DB.
 			var newUser = new User({
 				name: req.body.name,
 				email: req.body.email,
