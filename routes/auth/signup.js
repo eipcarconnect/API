@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config/database');
 const uniqid = require('uniqid');
 const bcrypt = require('bcrypt');
+const moment = require('moment')
 
 /**
  * @api {post} /auth/signup SignUp a new User
@@ -68,7 +69,7 @@ function(req, res) {
 				email: req.body.email,
 				password: hash,
 				id: uniqid(),
-				birthdate: req.body.birthdate
+				birthdate: moment().format(req.body.birthdate)
 			});
 			
 			newUser.save(function(err, user) {
