@@ -78,6 +78,7 @@ function(req, res) {
 					res.status(400);
 					return res.json({success: false, error: 'UserAlreadyExist'});
 				}
+				console.log("User created with sucess");
 				res.status(200);
 				var token = jwt.sign(user.toJSON(), config.secret);
 				// return the information including token as JSON
