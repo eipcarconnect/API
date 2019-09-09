@@ -82,7 +82,7 @@ function (req, res) {
 			} else {
 				// check if password matches
 				bcrypt.compare(req.body.password, user.password, function(err, isMatch) {
-					if (isMatch && !err) {
+					if (isMatch) {
 						// if user is found and password is right create a token
 						var token = jwt.sign(user.toJSON(), config.secret);
 						// return the information including token as JSON

@@ -73,6 +73,8 @@ function(req, res) {
 			
 			newUser.save(function(err, user) {
 				if (err) {
+					console.log("Error :", err);
+					console.log("Body :", req.body);
 					res.status(400);
 					return res.json({success: false, error: 'UserAlreadyExist'});
 				}
