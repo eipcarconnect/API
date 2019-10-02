@@ -62,6 +62,22 @@ function(req, res) {
 		res.status(400);
 		res.json({success: false, error: 'MissingArgument'});
 	} else {
+		User.findOne({
+			email: req.body.email
+		}, function(err, user) {
+			if (user) {
+				res.status(400);
+				return res.json({success: false, error: 'UserAlreadyExist'});
+			}
+		})
+		let reg = new RegExp("(?=.*[A-z])(?=.*[0-9])(?=.{8,})");
+		
+		if (!reg.test(req.body.password)) {
+			console.log("Password is weak");
+			res.status(400);
+			return res.json({success: false, error: 'PasswordIsWeak'});
+		}
+
 		console.log("Creating New User");
 		bcrypt.hash(req.body.password, 10, function(err, hash) {
 			var newUser = new User({
@@ -72,12 +88,13 @@ function(req, res) {
 				birthdate: moment().format(req.body.birthdate)
 			});
 			
+
 			newUser.save(function(err, user) {
 				if (err) {
 					console.log("Error :", err);
 					console.log("Body :", req.body);
-					res.status(400);
-					return res.json({success: false, error: 'UserAlreadyExist'});
+					res.status(500);
+					return res.json({success: false, error: 'APIInternalError'});
 				}
 				console.log("User created with sucess");
 				res.status(200);

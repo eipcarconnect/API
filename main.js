@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const auth = require('./routes/auth.js')
+const getuserinfos = require('./routes/auth/getuserinfos.js')
 const cors = require('cors');
 const port = 3000;
 const config = require('./config/database');
