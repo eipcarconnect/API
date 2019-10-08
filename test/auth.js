@@ -79,6 +79,58 @@ describe("Auth Routes Testing", function() {
 
         
     });
+
+    before(function (done) {
+        User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
+    
+            bcrypt.hash("testpassworddonotuse123", 10, function(err, hash) {
+
+                let newUser = new User({
+                    name: "testnamedonotuse",
+                    email: "testemaildonotuse@gmail.com",
+                    password: hash,
+                    id: uniqid(),
+                    birthdate: moment().format("1998-10-08")
+                });
+                
+                newUser.save(function(err, user) {
+                    done();
+                })
+            })
+        })
+    })
+
+    describe("Signin test", function() {
+        it("Basic signin", function(done) {
+            request.post("http://localhost:3000/auth/signin").form({
+                email: "testemaildonotuse@gmail.com",
+                password: "testpassworddonotuse123"
+            }).on('response', function(response) {
+                expect(response.statusCode).to.equal(200);
+                done();
+            })
+        })
+
+        it("Wrong password", function(done) {
+            request.post("http://localhost:3000/auth/signin").form({
+                email: "testemaildonotuse@gmail.com",
+                password: "testpassworddfonotuse123"
+            }).on('response', function(response) {
+                expect(response.statusCode).to.equal(404);
+                done();
+            })
+        })
+
+        it("Wrong email", function(done) {
+            request.post("http://localhost:3000/auth/signin").form({
+                email: "testemaildonotusfe@gmail.com",
+                password: "testpassworddonotuse123"
+            }).on('response', function(response) {
+                expect(response.statusCode).to.equal(404);
+                done();
+            })
+        })
+    })
 })
 
 after(function(done) {
