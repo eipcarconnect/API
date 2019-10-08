@@ -139,11 +139,7 @@ describe("Auth Routes Testing", function() {
                 password: "testpassworddonotuse123",
                 email: "testemaildonotuse@gmail.com"
             }).on('response', function(response) {
-                expect(response.body).to.equal(true);
-                if (response.body)
-                    expect(response.body.name).to.equal("testnamedonotuse");
-                else
-                    expect(1 + 1).to.equal(3);
+                expect(response.body['name']).to.equal("testnamedonotuse");
                 done();
             })
         })
@@ -153,11 +149,7 @@ describe("Auth Routes Testing", function() {
                 password: "testpassworddonotuse123",
                 email: "testemaildonotuse@gmail.com"
             }).on('response', function(response) {
-                expect(response.body).to.equal(true);
-                if (response.body)
-                    expect(response.body.name).to.equal("1998-10-08T00:00:00.000Z");
-                else
-                    expect(1 + 1).to.equal(3);
+                expect(response.body['birthday']).to.equal("1998-10-08T00:00:00.000Z");
                 done();
             })
         })
@@ -167,11 +159,7 @@ describe("Auth Routes Testing", function() {
                 password: "testpassworddonotuse123",
                 email: "testemaildonotuse@gmail.com"
             }).on('response', function(response) {
-                
-                if (response.body)
-                    expect(response.body.name).to.equal("testemaildonotuse@gmail.com");
-                else
-                    expect(1 + 1).to.equal(3);
+                expect(response.body['email']).to.equal("testemaildonotuse@gmail.com");
                 done();
             })
         })
