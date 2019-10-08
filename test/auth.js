@@ -3,6 +3,7 @@ const expect = require("chai").expect;
 const request = require("request");
 const User = require('../models/user');
 const uniqid = require('uniqid');
+const bcrypt = require('bcrypt');
 let server;
 
 before(function (done) {
