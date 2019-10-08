@@ -131,6 +131,45 @@ describe("Auth Routes Testing", function() {
             })
         })
     })
+
+    describe("Get User Infos", function () {
+        it("Name check", function(done) {
+
+            request.post("http://localhost:3000/auth/getuserinfos").form({
+                password: "testpassworddonotuse123",
+                email: "testemaildonotuse@gmail.com"
+            }).on('response', function(response) {
+                expect(response.body).to.equal(true);
+                if (response.body)
+                    expect(response.body.name).to.equal("testnamedonotuse");
+                done();
+            })
+        })
+
+        it("Birthday check", function(done) {
+            request.post("http://localhost:3000/auth/getuserinfos").form({
+                password: "testpassworddonotuse123",
+                email: "testemaildonotuse@gmail.com"
+            }).on('response', function(response) {
+                expect(response.body).to.equal(true);
+                if (response.body)
+                    expect(response.body.name).to.equal("1998-10-08T00:00:00.000Z");
+                done();
+            })
+        })
+
+        it("Email check", function(done) {
+            request.post("http://localhost:3000/auth/getuserinfos").form({
+                password: "testpassworddonotuse123",
+                email: "testemaildonotuse@gmail.com"
+            }).on('response', function(response) {
+                expect(response.body).to.equal(true);
+                if (response.body)
+                    expect(response.body.name).to.equal("testemaildonotuse@gmail.com");
+                done();
+            })
+        })
+    })
 })
 
 after(function(done) {
