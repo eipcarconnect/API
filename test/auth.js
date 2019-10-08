@@ -9,28 +9,27 @@ before(function (done) {
         User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
 
         })
-        done();  
+       
+        done();
     });
 
-    
+    server.
     
 })
 
 describe("Auth Routes Testing", function() {
 
-    describe("Signup Route", function() {
+    describe("Signup test", function() {
         it("Basic Sign up", function() {
-    
-            request.post({url : "localhost:3000/auth/signup", form: {
-                name: "testnamedonotuse",
-                password: "testpassworddonotuse123",
-                email: "testemaildonotuse@gmail.com",
-                birthdate: "1998-10-08"
-            }}, function(err, httpResponse, body) {
-                expect(body.success).to.equal(true);
-            })
-            
-            
+                request.post("localhost:3000/auth/signup").form({
+                    name: "testnamedonotuse",
+                    password: "testpassworddonotuse123",
+                    email: "testemaildonotuse@gmail.com",
+                    birthdate: "1998-10-08"
+                }).on('response', function(response) {
+                    expect(response.statusCode).to.equal(200);
+                })
+          
         })
     });
 })
