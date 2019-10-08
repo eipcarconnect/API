@@ -147,14 +147,14 @@ describe("Auth Routes Testing", function() {
         
 
         it("Name check", function(done) {
-
-            request.post("http://localhost:3000/auth/getuserinfos").form({
-                token: token
-            }).on('response', function(response) {
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                console.log("Body :" + body);
+                // console.log("Err :" + err);
+                // console.log("Response :" + httpResponse);
                 let name = response.body['name'];
                 expect(name).to.equal("testnamedonotuse");
                 done();
-            })
+             })
         })
 
         it("Birthday check", function(done) {
