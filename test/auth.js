@@ -6,9 +6,7 @@ let server;
 
 before(function (done) {
     server = app.listen(3000, function() {
-        User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
-
-        })
+        
        
         done();
     });
@@ -19,15 +17,32 @@ describe("Auth Routes Testing", function() {
 
     describe("Signup test", function() {
         it("Basic Sign up", function() {
-            request.post("http://localhost:3000/auth/signup").form({
-                name: "testnamedonotuse",
-                password: "testpassworddonotuse123",
-                email: "testemaildonotuse@gmail.com",
-                birthdate: "1998-10-08"
-            }).on('response', function(response) {
-                expect(response.statusCode).to.equal(200);
+            User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
+
+                request.post("http://localhost:3000/auth/signup").form({
+                    name: "testnamedonotuse",
+                    password: "testpassworddonotuse123",
+                    email: "testemaildonotuse@gmail.com",
+                    birthdate: "1998-10-08"
+                }).on('response', function(response) {
+                    expect(response.statusCode).to.equal(200);
+                })
             })
           
+        })
+
+        it("Weak Password", function(){
+            User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
+
+                request.post("http://localhost:3000/auth/signup").form({
+                    name: "testnamedonotuse",
+                    password: "123",
+                    email: "testemaildonotuse@gmail.com",
+                    birthdate: "1998-10-08"
+                }).on('response', function(response) {
+                    expect(response.body.error).to.equal('PasswordIsWeak');
+                })
+            })
         })
     });
 })
