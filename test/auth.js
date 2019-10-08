@@ -18,16 +18,16 @@ before(function (done) {
 
 describe("Auth Routes Testing", function() {
 
-    describe("Signup test", function() {
+    describe("Signup Route", function() {
         it("Basic Sign up", function() {
     
-            request.post({url : "localhost:3000", form: {
+            request.post({url : "localhost:3000/auth/signup", form: {
                 name: "testnamedonotuse",
                 password: "testpassworddonotuse123",
                 email: "testemaildonotuse@gmail.com",
                 birthdate: "1998-10-08"
             }}, function(err, httpResponse, body) {
-                expect().to.equal(2);
+                expect(body.success).to.equal(true);
             })
             
             
