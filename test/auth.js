@@ -16,7 +16,7 @@ before(function (done) {
 describe("Auth Routes Testing", function() {
 
     describe("Signup test", function() {
-        it("Basic Sign up", function() {
+        it("Basic Sign up", function(done) {
             User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
 
                 request.post("http://localhost:3000/auth/signup").form({
@@ -26,12 +26,13 @@ describe("Auth Routes Testing", function() {
                     birthdate: "1998-10-08"
                 }).on('response', function(response) {
                     expect(response.statusCode).to.equal(200);
+                    done();
                 })
             })
           
         })
 
-        it("Weak Password", function(){
+        it("Weak Password", function(done){
             User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
 
                 request.post("http://localhost:3000/auth/signup").form({
@@ -41,6 +42,7 @@ describe("Auth Routes Testing", function() {
                     birthdate: "1998-10-08"
                 }).on('response', function(response) {
                     expect(response.body.error).to.equal('PasswordIsWeak');
+                    done();
                 })
             })
         })
