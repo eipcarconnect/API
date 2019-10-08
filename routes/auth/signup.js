@@ -62,30 +62,50 @@ function(req, res) {
 		res.status(400);
 		res.json({success: false, error: 'MissingArgument'});
 	} else {
-		console.log("Creating New User");
-		bcrypt.hash(req.body.password, 10, function(err, hash) {
-			var newUser = new User({
-				name: req.body.name,
-				email: req.body.email,
-				password: hash,
-				id: uniqid(),
-				birthdate: moment().format(req.body.birthdate)
-			});
-			
-			newUser.save(function(err, user) {
-				if (err) {
-					console.log("Error :", err);
-					console.log("Body :", req.body);
+		User.findOne({
+			email: req.body.email
+		}, function(err, user) {
+			if (user) {
+				res.status(400);
+				return res.json({success: false, error: 'UserAlreadyExist'});
+			}
+			else {
+
+				let reg = new RegExp("(?=.*[A-z])(?=.*[0-9])(?=.{8,})");
+				
+				if (!reg.test(req.body.password)) {
+					console.log("Password is weak");
 					res.status(400);
-					return res.json({success: false, error: 'UserAlreadyExist'});
+					return res.json({success: false, error: 'PasswordIsWeak'});
 				}
-				console.log("User created with sucess");
-				res.status(200);
-				var token = jwt.sign(user.toJSON(), config.secret);
-				// return the information including token as JSON
-				res.json({ success: true, token: 'JWT ' + token });
-			});
-		  });		
+		
+				console.log("Creating New User");
+				bcrypt.hash(req.body.password, 10, function(err, hash) {
+					var newUser = new User({
+						name: req.body.name,
+						email: req.body.email,
+						password: hash,
+						id: uniqid(),
+						birthdate: moment().format(req.body.birthdate)
+					});
+					
+		
+					newUser.save(function(err, user) {
+						if (err) {
+							console.log("Error :", err);
+							console.log("Body :", req.body);
+							res.status(500);
+							return res.json({success: false, error: 'APIInternalError'});
+						}
+						console.log("User created with sucess");
+						res.status(200);
+						var token = jwt.sign(user.toJSON(), config.secret);
+						// return the information including token as JSON
+						res.json({ success: true, token: 'JWT ' + token });
+					});
+				  });		
+			}
+		})
 		
 	}
 };

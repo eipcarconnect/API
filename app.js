@@ -5,6 +5,7 @@ const cors = require('cors');
 const config = require('./config/database');
 const mongoose = require('mongoose');
 
+
 mongoose.connect(config.database, {useNewUrlParser: true});
 
 app.use(function (req, res, next) {
