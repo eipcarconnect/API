@@ -5,6 +5,8 @@ const User = require('../models/user');
 const uniqid = require('uniqid');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
+const jwt = require("jsonwebtoken");
+const config = require('../config/database');
 let server;
 
 before(function (done) {
@@ -80,12 +82,14 @@ describe("Auth Routes Testing", function() {
         
     });
 
+    let newUser;
+
     before(function (done) {
         User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
     
             bcrypt.hash("testpassworddonotuse123", 10, function(err, hash) {
 
-                let newUser = new User({
+                newUser = new User({
                     name: "testnamedonotuse",
                     email: "testemaildonotuse@gmail.com",
                     password: hash,
@@ -132,22 +136,29 @@ describe("Auth Routes Testing", function() {
         })
     })
 
+    let token;
+
+    before(function (done) {
+        token = jwt.sign(newUser.toJSON(), config.secret)
+    })
+
     describe("Get User Infos", function () {
+        
+
         it("Name check", function(done) {
 
             request.post("http://localhost:3000/auth/getuserinfos").form({
-                password: "testpassworddonotuse123",
-                email: "testemaildonotuse@gmail.com"
+                token: token
             }).on('response', function(response) {
-                expect(response.body['name']).to.equal("testnamedonotuse");
+                let name = response.body['name'];
+                expect(name).to.equal("testnamedonotuse");
                 done();
             })
         })
 
         it("Birthday check", function(done) {
             request.post("http://localhost:3000/auth/getuserinfos").form({
-                password: "testpassworddonotuse123",
-                email: "testemaildonotuse@gmail.com"
+                token: token
             }).on('response', function(response) {
                 expect(response.body['birthday']).to.equal("1998-10-08T00:00:00.000Z");
                 done();
@@ -156,8 +167,7 @@ describe("Auth Routes Testing", function() {
 
         it("Email check", function(done) {
             request.post("http://localhost:3000/auth/getuserinfos").form({
-                password: "testpassworddonotuse123",
-                email: "testemaildonotuse@gmail.com"
+                token: token
             }).on('response', function(response) {
                 expect(response.body['email']).to.equal("testemaildonotuse@gmail.com");
                 done();
