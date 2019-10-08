@@ -55,7 +55,7 @@ describe("Auth Routes Testing", function() {
 
                 bcrypt.hash("testpassworddonotuse123", 10, function(err, hash) {
                     let newUser = new User({
-                        name: testnamedonotuse,
+                        name: "testnamedonotuse",
                         email: "testemaildonotuse@gmail.com",
                         password: hash,
                         id: uniqid(),
