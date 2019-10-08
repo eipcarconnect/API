@@ -142,6 +142,8 @@ describe("Auth Routes Testing", function() {
                 expect(response.body).to.equal(true);
                 if (response.body)
                     expect(response.body.name).to.equal("testnamedonotuse");
+                else
+                    expect(1 + 1).to.equal(3);
                 done();
             })
         })
@@ -154,6 +156,8 @@ describe("Auth Routes Testing", function() {
                 expect(response.body).to.equal(true);
                 if (response.body)
                     expect(response.body.name).to.equal("1998-10-08T00:00:00.000Z");
+                else
+                    expect(1 + 1).to.equal(3);
                 done();
             })
         })
@@ -167,7 +171,7 @@ describe("Auth Routes Testing", function() {
                 if (response.body)
                     expect(response.body.name).to.equal("testemaildonotuse@gmail.com");
                 else
-                    expect(1).to.equal(2);
+                    expect(1 + 1).to.equal(3);
                 done();
             })
         })
