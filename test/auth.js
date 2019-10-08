@@ -148,31 +148,26 @@ describe("Auth Routes Testing", function() {
 
         it("Name check", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
-                console.log("Body :" + body);
-                // console.log("Err :" + err);
-                // console.log("Response :" + httpResponse);
-                let name = response.body['name'];
+                let name = body['name'];
                 expect(name).to.equal("testnamedonotuse");
                 done();
              })
         })
 
         it("Birthday check", function(done) {
-            request.post("http://localhost:3000/auth/getuserinfos").form({
-                token: token
-            }).on('response', function(response) {
-                expect(response.body['birthday']).to.equal("1998-10-08T00:00:00.000Z");
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                let name = body['name'];
+                expect(body['birthday']).to.equal("1998-10-08T00:00:00.000Z");
                 done();
-            })
+             })
         })
 
         it("Email check", function(done) {
-            request.post("http://localhost:3000/auth/getuserinfos").form({
-                token: token
-            }).on('response', function(response) {
-                expect(response.body['email']).to.equal("testemaildonotuse@gmail.com");
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                let name = body['name'];
+                expect(body['email']).to.equal("testemaildonotuse@gmail.com");
                 done();
-            })
+             })
         })
     })
 })
