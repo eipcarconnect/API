@@ -148,8 +148,8 @@ describe("Auth Routes Testing", function() {
 
         it("Name check", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
-                console.log(body);
-                let name = body["name"];
+                let parsedbody = JSON.parse(body)
+                let name = parsedbody.name;
                 expect(name).to.equal("testnamedonotuse");
                 done();
              })
@@ -157,14 +157,16 @@ describe("Auth Routes Testing", function() {
 
         it("Birthday check", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
-                expect(body.birthday).to.equal("1998-10-08T00:00:00.000Z");
+                let parsedbody = JSON.parse(body)
+                expect(parsedbody.birthday).to.equal("1998-10-08T00:00:00.000Z");
                 done();
              })
         })
 
         it("Email check", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
-                expect(body['email']).to.equal("testemaildonotuse@gmail.com");
+                let parsedbody = JSON.parse(body)
+                expect(parsedbody.email).to.equal("testemaildonotuse@gmail.com");
                 done();
              })
         })
