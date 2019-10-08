@@ -140,6 +140,7 @@ describe("Auth Routes Testing", function() {
 
     before(function (done) {
         token = jwt.sign(newUser.toJSON(), config.secret)
+        done();
     })
 
     describe("Get User Infos", function () {
