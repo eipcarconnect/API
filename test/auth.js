@@ -70,7 +70,7 @@ describe("Auth Routes Testing", function() {
                             expect(response.statusCode).to.equal(400);
                             done();
                         })
-                    }
+                    })
                 })
             })
         })
