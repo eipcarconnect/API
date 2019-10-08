@@ -148,7 +148,8 @@ describe("Auth Routes Testing", function() {
 
         it("Name check", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
-                let name = body['name'];
+                console.log(body);
+                let name = body["name"];
                 expect(name).to.equal("testnamedonotuse");
                 done();
              })
@@ -156,15 +157,13 @@ describe("Auth Routes Testing", function() {
 
         it("Birthday check", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
-                let name = body['name'];
-                expect(body['birthday']).to.equal("1998-10-08T00:00:00.000Z");
+                expect(body.birthday).to.equal("1998-10-08T00:00:00.000Z");
                 done();
              })
         })
 
         it("Email check", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
-                let name = body['name'];
                 expect(body['email']).to.equal("testemaildonotuse@gmail.com");
                 done();
              })
