@@ -163,9 +163,11 @@ describe("Auth Routes Testing", function() {
                 password: "testpassworddonotuse123",
                 email: "testemaildonotuse@gmail.com"
             }).on('response', function(response) {
-                expect(response.body).to.equal(true);
+                
                 if (response.body)
                     expect(response.body.name).to.equal("testemaildonotuse@gmail.com");
+                else
+                    expect(1).to.equal(2);
                 done();
             })
         })
