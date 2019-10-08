@@ -2,6 +2,7 @@ const app = require("../app");
 const expect = require("chai").expect;
 const request = require("request");
 const User = require('../models/user');
+const uniqid = require('uniqid');
 let server;
 
 before(function (done) {
@@ -41,11 +42,40 @@ describe("Auth Routes Testing", function() {
                     email: "testemaildonotuse@gmail.com",
                     birthdate: "1998-10-08"
                 }).on('response', function(response) {
-                    expect(response.body.error).to.equal('PasswordIsWeak');
+                   
+                    expect(response.statusCode).to.equal(400);
                     done();
                 })
             })
         })
+
+        it("Already Exist", function(done){
+            User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
+
+                bcrypt.hash("testpassworddonotuse123", 10, function(err, hash) {
+                    let newUser = new User({
+                        name: testnamedonotuse,
+                        email: "testemaildonotuse@gmail.com",
+                        password: hash,
+                        id: uniqid(),
+                        birthdate: moment().format("1998-10-08")
+                    });
+                    newUser.save(function(err, user) {
+                        request.post("http://localhost:3000/auth/signup").form({
+                            name: "testnamedonotuse",
+                            password: "testpassworddonotuse123",
+                            email: "testemaildonotuse@gmail.com",
+                            birthdate: "1998-10-08"
+                        }).on('response', function(response) {
+                            expect(response.statusCode).to.equal(400);
+                            done();
+                        })
+                    }
+                })
+            })
+        })
+
+        
     });
 })
 
