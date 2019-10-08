@@ -19,7 +19,7 @@ describe("Auth Routes Testing", function() {
 
     describe("Signup test", function() {
         it("Basic Sign up", function() {
-            request.post("localhost:3000/auth/signup").form({
+            request.post("http://localhost:3000/auth/signup").form({
                 name: "testnamedonotuse",
                 password: "testpassworddonotuse123",
                 email: "testemaildonotuse@gmail.com",
