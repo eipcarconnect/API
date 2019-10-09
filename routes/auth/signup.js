@@ -11,17 +11,19 @@ const moment = require('moment')
  * @apiName SignUp
  * @apiGroup Auth
  *
- * @apiParam {String} username Users unique username.
+ * @apiParam {String} name User last name and first name.
+ * @apiParam {String} username Users unique email.
  * @apiParam {String} password Users password.
+ * @apiParam {String} birthdate Users birthdate written in YYYY-MM-DD format.
  *
- * @apiSuccess {Boolean} success .
- * @apiSuccess {String} msg  .
+ * @apiSuccess {Boolean} success true
+ * @apiSuccess {String} token  The token needed to access authenticated page
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
  *	"success": true,
- *       "msg": "JWT TokenHere"
+ *       "token": "JWT TokenHere"
  *     }
  *
  * @apiError MissingArgument An argument of the request is missing
@@ -49,6 +51,22 @@ const moment = require('moment')
  *     {
  * 	 "success": false,
  *       "error": "BodyEmpty"
+ *     }
+ * @apiError PasswordIsWeak The Password does not fit the standard , it must be at least 8 character long and contain a number and a letter
+ *
+ * @apiErrorExample PasswordIsWeak:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "PasswordIsWeak"
+ *     }
+ * @apiError APIInternalError An error occured within the API pleace contat the admin
+ *
+ * @apiErrorExample APIInternalError:
+ *     HTTP/1.1 500 Internal Error
+ *     {
+ * 	 "success": false,
+ *       "error": "APIInternalError"
  *     }
  */
 

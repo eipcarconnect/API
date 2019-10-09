@@ -11,34 +11,34 @@ const bcrypt = require('bcrypt');
  * @apiName SignIn
  * @apiGroup Auth
  *
- * @apiParam {String} username Users unique username.
+ * @apiParam {String} email Users unique email.
  * @apiParam {String} password Users password.
  *
- * @apiSuccess {Boolean} success .
- * @apiSuccess {String} msg  .
+ * @apiSuccess {Boolean} success true
+ * @apiSuccess {String} token The token needed to access authenticated page
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *       "success": true,
+ *	"success": true,
  *       "token": "JWT YourTokenHere"
  *     }
  *
  * @apiError UserNotFound The requested user was not found in the database
  *
  * @apiErrorExample UserNotFound:
- *     HTTP/1.1 401 Unauthorized
+ *     HTTP/1.1 404 Not Found
  *     {
- * 		 "success": false,
+ *	"success": false,
  *       "error": "UserNotFound"
  *     }
  *
- * @apiError WrongPassword The password of the given username is incorrect
+ * @apiError WrongPassword The password of the given email is incorrect
  *
  * @apiErrorExample WrongPassword:
  *     HTTP/1.1 401 Unauthorized
  *     {
- * 	 	"success": false,
+ *	"success": false,
  *       "error": "WrongPassword"
  *     }
  * 
@@ -47,7 +47,7 @@ const bcrypt = require('bcrypt');
  * @apiErrorExample BodyEmpty:
  *     HTTP/1.1 400 Bad Request
  *     {
- * 	 	"success": false,
+ *	"success": false,
  *       "error": "BodyEmpty"
  *     }
  * 
@@ -56,7 +56,7 @@ const bcrypt = require('bcrypt');
  * @apiErrorExample MissingArgument:
  *     HTTP/1.1 400 Bad Request
  *     {
- * 	 	"success": false,
+ *	"success": false,
  *       "error": "MissingArgument"
  *     }
  * 
