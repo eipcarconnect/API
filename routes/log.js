@@ -17,7 +17,7 @@ function (message, level)
     let error = "[" + day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds + "] [" + level + "] " + message; 
     
     console.log(error);
-    fs.appendFile('../log.txt', error, function (err) {
+    fs.appendFile('log.txt', error + "\n", function (err) {
         if (err) 
             console.log('Error when writing log !');
       });

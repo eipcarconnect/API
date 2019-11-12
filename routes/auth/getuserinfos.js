@@ -1,6 +1,6 @@
 const config = require('../../config/database');
 const jwt = require('jsonwebtoken');
-
+const log = require('../log');
 
 /**
  * @api {post} /auth/getuserinfos Get User Infos
