@@ -54,19 +54,23 @@ const jwt = require('jsonwebtoken');
 module.exports = 
 function (req, res) {
 	if (!req.body) {
+		log("Body is empty", "INFO");
 		res.status(400);
 		return res.json({ success: false, error: 'BodyEmpty' });
 	} else if (!req.body.token) {
+		log("Body is empty", "INFO");
 		console.log(req.body);
 		res.status(400);
 		return res.json({ success: false, error: 'MissingArgument' });
 	} else {
 		jwt.verify(req.body.token, config.secret, function(err, decoded){
 			if (err) {
+				log("Invalid Token", "INFO");
 				res.status(400);
 				return res.json({ success: false, error: 'InvalidToken' });
 			}
 			else {
+				log("Info successfully retrieved", "INFO");
 				res.status(200);
 				return res.json({ 
 					success: true, 

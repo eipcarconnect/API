@@ -5,6 +5,7 @@ const config = require('../../config/database');
 const uniqid = require('uniqid');
 const bcrypt = require('bcrypt');
 const moment = require('moment')
+const log = require('../log');
 
 /**
  * @api {post} /auth/signup SignUp a new User
@@ -73,10 +74,11 @@ const moment = require('moment')
 module.exports = 
 function(req, res) {
 	if (!req.body) {
+		log("Body is empty", "INFO");
 		res.status(400);
 		res.json({success: false, error: 'BodyEmpty'});
 	} else if (!req.body.name || !req.body.email || !req.body.password || !req.body.birthdate) {
-		console.log(req.body);
+		log("Missing argument", "INFO");
 		res.status(400);
 		res.json({success: false, error: 'MissingArgument'});
 	} else {
@@ -85,6 +87,7 @@ function(req, res) {
 		}, function(err, user) {
 			if (user) {
 				res.status(400);
+				log("User already exist", "INFO");
 				return res.json({success: false, error: 'UserAlreadyExist'});
 			}
 			else {
@@ -92,12 +95,11 @@ function(req, res) {
 				let reg = new RegExp("(?=.*[A-z])(?=.*[0-9])(?=.{8,})");
 				
 				if (!reg.test(req.body.password)) {
-					console.log("Password is weak");
+					log("Password is weak", "INFO");
 					res.status(400);
 					return res.json({success: false, error: 'PasswordIsWeak'});
 				}
-		
-				console.log("Creating New User");
+				log("Creating New User", "INFO");
 				bcrypt.hash(req.body.password, 10, function(err, hash) {
 					var newUser = new User({
 						name: req.body.name,
@@ -110,12 +112,11 @@ function(req, res) {
 		
 					newUser.save(function(err, user) {
 						if (err) {
-							console.log("Error :", err);
-							console.log("Body :", req.body);
+							log(err, "ERROR");
 							res.status(500);
 							return res.json({success: false, error: 'APIInternalError'});
 						}
-						console.log("User created with sucess");
+						log("User created with sucess", "INFO");
 						res.status(200);
 						var token = jwt.sign(user.toJSON(), config.secret);
 						// return the information including token as JSON

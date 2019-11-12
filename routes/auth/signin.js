@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config/database');
 const uniqid = require('uniqid');
 const bcrypt = require('bcrypt');
-
+const log = require('../log');
 
 /**
  * @api {post} /auth/signin SignIn a User
@@ -65,9 +65,11 @@ const bcrypt = require('bcrypt');
 module.exports = 
 function (req, res) {
 	if (!req.body) {
+		log("Body is empty", "INFO");
 		res.status(400);
 		res.json({ success: false, error: 'BodyEmpty' });
 	} else if (!req.body.email || !req.body.password) {
+		log("Missing argument", "INFO");
 		console.log(req.body);
 		res.status(400);
 		res.json({ success: false, error: 'MissingArgument' });
@@ -75,19 +77,23 @@ function (req, res) {
 		User.findOne({
 			email: req.body.email
 		}, function (err, user) {
-			if (err) throw err;
+			if (err) 
+			log(err, "ERROR");
 	
 			if (!user) {
+				log("User not found", "INFO");
 				res.status(404).send({ success: false, error: 'UserNotFound' });
 			} else {
 				// check if password matches
 				bcrypt.compare(req.body.password, user.password, function(err, isMatch) {
 					if (isMatch) {
+						log("User successfuly connected", "INFO");
 						// if user is found and password is right create a token
 						var token = jwt.sign(user.toJSON(), config.secret);
 						// return the information including token as JSON
 						res.json({ success: true, token: 'JWT ' + token });
 					} else {
+						log("Wrong Password used", "INFO");
 						res.status(404).send({ success: false, error: 'WrongPassword' });
 					}
 				});
