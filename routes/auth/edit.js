@@ -110,7 +110,7 @@ function (req, res) {
                                         res.status(500);
                                         return res.json({success: false, error: 'APIInternalError'});
                                     }
-                                    log("User created with sucess", "INFO");
+                                    log("User info modified with success", "INFO");
                                     res.status(200);
                                     return res.json({ success: true, msg: "Information successfully modified"});
                                 });
@@ -119,9 +119,16 @@ function (req, res) {
                     }
                     else 
                     {
-                        log("User created with sucess", "INFO");
-                        res.status(200);
-                        return res.json({ success: true, msg: "Information successfully modified"});
+                        user.save(function(err, user) {
+                            if (err) {
+                                log(err, "ERROR");
+                                res.status(500);
+                                return res.json({success: false, error: 'APIInternalError'});
+                            }
+                            log("User info modified with success", "INFO");
+                            res.status(200);
+                            return res.json({ success: true, msg: "Information successfully modified"});
+                        });
                     }
                 })
 		    };
