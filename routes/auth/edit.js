@@ -110,6 +110,8 @@ function (req, res) {
                                         res.status(500);
                                         return res.json({success: false, error: 'APIInternalError'});
                                     }
+                                    log(user, 'ERROR');
+
                                     log("User info modified with success", "INFO");
                                     res.status(200);
                                     return res.json({ success: true, msg: "Information successfully modified"});
@@ -126,6 +128,7 @@ function (req, res) {
                                 return res.json({success: false, error: 'APIInternalError'});
                             }
                             log("User info modified with success", "INFO");
+                            log(user, 'INFO');
                             res.status(200);
                             return res.json({ success: true, msg: "Information successfully modified"});
                         });
