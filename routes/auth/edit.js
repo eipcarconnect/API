@@ -79,7 +79,7 @@ function (req, res) {
                     if (err) {
                         log(err, "ERROR");
                         res.status(500);
-                        return res.json({success: false, error: 'UserNotFound'});
+                        return res.json({success: false, error: 'ApiInternalError'});
                     }
 
                     if (req.body.email && req.body.email != "") 

@@ -74,12 +74,10 @@ function (req, res) {
 				User.findOne({
                     email: decoded.email
                 }, function(err, user) {
-					log(err, "ERROR");
-					log(user, "INFO");
-                    if (err) {
+                    if (!user) {
                         log(err, "ERROR");
                         res.status(500);
-                        return res.json({success: false, error: 'ApiInternalError'});
+                        return res.json({success: false, error: 'InvalidToken'});
 					}
 					else {
 						log("Info successfully retrieved", "INFO");
