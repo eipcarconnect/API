@@ -74,6 +74,8 @@ function (req, res) {
 				User.findOne({
                     email: decoded.email
                 }, function(err, user) {
+					log(err, "ERROR");
+					log(user, "INFO");
                     if (err) {
                         log(err, "ERROR");
                         res.status(500);
