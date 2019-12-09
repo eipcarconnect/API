@@ -75,7 +75,12 @@ function (req, res) {
                 User.findOne({
                     email: decoded.email
                 }, function(err, user) {
-                    
+                    if (err) {
+                        log(err, "ERROR");
+                        res.status(500);
+                        return res.json({success: false, error: 'UserNotFound'});
+                    }
+
                     if (req.body.email && req.body.email != "") 
                     {
                         user.email = req.body.email;
@@ -112,7 +117,6 @@ function (req, res) {
                                     }
                                     log(user, 'ERROR');
 
-                                    log("User info modified with success", "INFO");
                                     res.status(200);
                                     return res.json({ success: true, msg: "Information successfully modified"});
                                 });
@@ -127,7 +131,6 @@ function (req, res) {
                                 res.status(500);
                                 return res.json({success: false, error: 'APIInternalError'});
                             }
-                            log("User info modified with success", "INFO");
                             log(user, 'INFO');
                             res.status(200);
                             return res.json({ success: true, msg: "Information successfully modified"});
