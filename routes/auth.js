@@ -3,7 +3,9 @@ const router = express.Router();
 const signup = require('./auth/signup.js');
 const signin = require('./auth/signin.js');
 const getuserinfos = require('./auth/getuserinfos.js');
+const edit = require('./auth/edit.js');
 
+router.route('/edit').post(edit);
 
 router.route('/signup').post(signup);
 
