@@ -70,14 +70,26 @@ function (req, res) {
 				return res.json({ success: false, error: 'InvalidToken' });
 			}
 			else {
-				log("Info successfully retrieved", "INFO");
-				res.status(200);
-				return res.json({ 
-					success: true, 
-					name: decoded.name, 
-					email: decoded.email,
-					birthdate: decoded.birthdate
-				 });
+				User.findOne({
+                    email: decoded.email
+                }, function(err, user) {
+                    if (err) {
+                        log(err, "ERROR");
+                        res.status(500);
+                        return res.json({success: false, error: 'ApiInternalError'});
+					}
+					else {
+						log("Info successfully retrieved", "INFO");
+						res.status(200);
+						return res.json({ 
+							success: true, 
+							name: user.name, 
+							email: user.email,
+							birthdate: user.birthdate
+						});
+					}
+				});
+				
 			}
 		});
 	}

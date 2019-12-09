@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const log = require('../log');
 const User = require('../../models/user');
 const moment = require('moment');
+const bcrypt = require('bcrypt');
 
 /**
  * @api {post} /auth/edit Edit User Infos
