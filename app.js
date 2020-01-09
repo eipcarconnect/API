@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const auth = require('./routes/auth.js')
+const data = require('./routes/data.js')
 const cors = require('cors');
 const config = require('./config/database');
 const mongoose = require('mongoose');
@@ -23,5 +24,7 @@ app.use(cors());
 app.get('/test', (req, res) => res.send('Express is working'));
 
 app.use('/auth', auth);
+
+app.use('/data', data);
 
 module.exports = app;
