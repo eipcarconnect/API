@@ -13,17 +13,13 @@ const bcrypt = require('bcrypt');
  * @apiParam {String} token The user token
  *
  * @apiSuccess {Boolean} success true
- * @apiSuccess {String} name  The name of the user
- * @apiSuccess {String} email  The email address of the user
- * @apiSuccess {String} birthdate  The birthdate of the user
+ * @apiSuccess {String} msg   Message of success
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *			"success: true, 
- *			"name": "name", 
- *			"email": "emailaddress",
- *			"birthdate": "YYYY-MM-DDTHH:MM:SS.000Z"
+ *			"success": true, 
+ *			"msg" : "Information successfully modified"
  *     }
  *
  * @apiError MissingArgument An argument of the request is missing
@@ -46,11 +42,29 @@ const bcrypt = require('bcrypt');
  * 
  * @apiError InvalidToken The token provided is invalid
  *
- * @apiErrorExample Invalid Token:
+ * @apiErrorExample InvalidToken:
  *     HTTP/1.1 400 Bad Request
  *     {
  * 	 "success": false,
- *       "error": "Invalid Token"
+ *       "error": "InvalidToken"
+ *     }
+ * 
+ * @apiError PasswordIsWeak The password provided is weak
+ *
+ * @apiErrorExample PasswordIsWeak:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "PasswordIsWeak"
+ *     }
+ * 
+ * @apiError ApiInternalError There was an internal error in the API
+ *
+ * @apiErrorExample ApiInternalError:
+ *     HTTP/1.1 500 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "ApiInternalError"
  *     }
  */
 
