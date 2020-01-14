@@ -179,7 +179,7 @@ describe("Auth Routes Testing", function() {
                     birthdate: "1998-10-09"
                 }).on('response', function(response) {
                    
-                    expect(response.statusCode).to.equal(400);
+                    expect(response.statusCode).to.equal(200);
                     done();
                 })
     })
