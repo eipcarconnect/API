@@ -4,6 +4,7 @@ const request = require("request");
 const User = require('../models/user');
 const jwt = require("jsonwebtoken");
 const config = require('../config/database');
+const bcrypt = require('bcrypt');
 let server;
 let token;
 let newUser;
