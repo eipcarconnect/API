@@ -198,6 +198,53 @@ describe("Auth Routes Testing", function() {
              })
         })
     })
+
+    describe("Get Vehicue Infos", function () {
+        it("Success", function() {
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                let parsedbody = JSON.parse(body)
+                expect(parsedbody.success).to.equal(true);
+                print("TEST " + parsedbody);
+                                done();
+            })
+            
+        })
+        it("Speed", function() {
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                let parsedbody = JSON.parse(body)
+                expect(parsedbody.speed).to.equal(10);
+                done();
+             })
+        })
+        it("Fuel", function() {
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                let parsedbody = JSON.parse(body)
+                expect(parsedbody.fuel).to.equal(45);
+                done();
+             })
+        })
+        it("Latitude", function() {
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                let parsedbody = JSON.parse(body)
+                expect(parsedbody.latitude).to.equal(46.510492);
+                done();
+             })
+        })
+        it("Longitude", function() {
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                let parsedbody = JSON.parse(body)
+                expect(parsedbody.longitude).to.equal(3.533891);
+                done();
+             })
+        })
+        it("Global State", function() {
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                let parsedbody = JSON.parse(body)
+                expect(parsedbody.longitude).to.equal("Good");
+                done();
+             })
+        })
+    })
 })
 
 after(function(done) {
