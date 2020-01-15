@@ -211,6 +211,7 @@ describe("Auth Routes Testing", function() {
         it("Speed", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
+                console.log(parsedbody);
                 expect(parsedbody.speed).to.equal(10);
                 done();
              })
