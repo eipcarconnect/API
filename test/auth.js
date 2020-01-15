@@ -200,7 +200,7 @@ describe("Auth Routes Testing", function() {
     })
 
     describe("Get Vehicue Infos", function () {
-        it("Success", function() {
+        it("Success", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.success).to.equal(true);
@@ -208,35 +208,35 @@ describe("Auth Routes Testing", function() {
             })
             
         })
-        it("Speed", function() {
+        it("Speed", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.speed).to.equal(10);
                 done();
              })
         })
-        it("Fuel", function() {
+        it("Fuel", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.fuel).to.equal(45);
                 done();
              })
         })
-        it("Latitude", function() {
+        it("Latitude", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.latitude).to.equal(46.510492);
                 done();
              })
         })
-        it("Longitude", function() {
+        it("Longitude", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.longitude).to.equal(3.533891);
                 done();
              })
         })
-        it("Global State", function() {
+        it("Global State", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.longitude).to.equal("Good");
