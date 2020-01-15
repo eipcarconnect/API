@@ -7,26 +7,26 @@ const config = require('../config/database');
 let server;
 let token;
 
-before(function (done) {
-    server = app.listen(3001, function() {
+// before(function (done) {
+//     server = app.listen(3001, function() {
         
        
-        User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
+//         User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {
 
-            request.post("http://localhost:3001/auth/signup").form({
-                name: "testnamedonotuse",
-                password: "testpassworddonotuse123",
-                email: "testemaildonotuse@gmail.com",
-                birthdate: "1998-10-08"
-            }).on('response', function(response) {
-                token = jwt.sign(newUser.toJSON(), config.secret);
-                done();
-            })
-        })
+//             request.post("http://localhost:3001/auth/signup").form({
+//                 name: "testnamedonotuse",
+//                 password: "testpassworddonotuse123",
+//                 email: "testemaildonotuse@gmail.com",
+//                 birthdate: "1998-10-08"
+//             }).on('response', function(response) {
+//                 token = jwt.sign(newUser.toJSON(), config.secret);
+//                 done();
+//             })
+//         })
 
-    });
+//     });
     
-})
+// })
 
 describe("Data routes test", function() {
     before()
