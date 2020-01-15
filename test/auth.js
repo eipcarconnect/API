@@ -172,27 +172,21 @@ describe("Auth Routes Testing", function() {
         })
     })
 
-    before(function (done) {
-        request.post("http://localhost:3000/auth/edit").form({
+    describe("Modify Infos", function () {
+
+        it("Name check", function(done) {
+            request.post("http://localhost:3000/auth/edit").form({
                     token: token,
                     name: "testnamedonotuse1",
                     birthdate: "1998-10-09"
                 }).on('response', function(response) {
-                   
-                    expect(response.statusCode).to.equal(200);
-                    done();
+                    request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
+                        let parsedbody = JSON.parse(body)
+                        let name = parsedbody.name;
+                        expect(name).to.equal("testnamedonotuse1");
+                     })
                 })
-    })
-
-    describe("Modify Infos", function () {
-
-        it("Name check", function(done) {
-            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
-                let parsedbody = JSON.parse(body)
-                let name = parsedbody.name;
-                expect(name).to.equal("testnamedonotuse1");
-                done();
-             })
+            
         })
 
         it("Birthday check", function(done) {
