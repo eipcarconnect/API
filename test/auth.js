@@ -191,7 +191,7 @@ describe("Auth Routes Testing", function() {
         })
 
         it("Birthday check", function(done) {
-            request.post({url:'http://localhost:3000/auth/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
+            request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.birthdate).to.equal("1998-10-09T00:00:00.000Z");
                 done();
@@ -201,7 +201,7 @@ describe("Auth Routes Testing", function() {
 
     describe("Get Vehicue Infos", function () {
         it("Success", function(done) {
-            request.post({url:'http://localhost:3000/auth/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
+            request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.success).to.equal(true);
                 done();
@@ -209,7 +209,7 @@ describe("Auth Routes Testing", function() {
             
         })
         it("Speed", function(done) {
-            request.post({url:'http://localhost:3000/auth/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
+            request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 console.log(parsedbody);
                 expect(parsedbody.speed).to.equal(10);
@@ -217,28 +217,28 @@ describe("Auth Routes Testing", function() {
              })
         })
         it("Fuel", function(done) {
-            request.post({url:'http://localhost:3000/auth/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
+            request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.fuel).to.equal(45);
                 done();
              })
         })
         it("Latitude", function(done) {
-            request.post({url:'http://localhost:3000/auth/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
+            request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.latitude).to.equal(46.510492);
                 done();
              })
         })
         it("Longitude", function(done) {
-            request.post({url:'http://localhost:3000/auth/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
+            request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.longitude).to.equal(3.533891);
                 done();
              })
         })
         it("Global State", function(done) {
-            request.post({url:'http://localhost:3000/auth/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
+            request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.longitude).to.equal("Good");
                 done();
