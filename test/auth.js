@@ -204,6 +204,7 @@ describe("Auth Routes Testing", function() {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
                 expect(parsedbody.success).to.equal(true);
+                done();
             })
             
         })
