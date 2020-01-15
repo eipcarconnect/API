@@ -184,6 +184,7 @@ describe("Auth Routes Testing", function() {
                         let parsedbody = JSON.parse(body)
                         let name = parsedbody.name;
                         expect(name).to.equal("testnamedonotuse1");
+                        done();
                      })
                 })
             
@@ -192,7 +193,7 @@ describe("Auth Routes Testing", function() {
         it("Birthday check", function(done) {
             request.post({url:'http://localhost:3000/auth/getuserinfos', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
-                expect(parsedbody.birthdate).to.equal("1998-10-00T00:00:00.000Z");
+                expect(parsedbody.birthdate).to.equal("1998-10-09T00:00:00.000Z");
                 done();
              })
         })
