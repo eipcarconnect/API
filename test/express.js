@@ -1,7 +1,8 @@
 const expect = require("chai").expect;
+const express = require("express");
 
 describe("Express test", function() {
     it("the test route work", function() {
-        expect(1 + 1).to.equal(2);
+        expect(express).to.not.equal(null);
     })
 });
