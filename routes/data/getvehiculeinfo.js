@@ -4,7 +4,7 @@ const log = require('../log');
 const User = require('../../models/user');
 
 /**
- * @api {post} /auth/getvehiculeinfo Get Vehicule Info
+ * @api {post} /data/getvehiculeinfo Get Vehicule Info
  * @apiName Get Vehicule Info
  * @apiGroup Data
  *

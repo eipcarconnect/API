@@ -462,7 +462,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/auth/getvehiculeinfo",
+    "url": "/data/getvehiculeinfo",
     "title": "Get Vehicule Info",
     "name": "Get_Vehicule_Info",
     "group": "Data",
