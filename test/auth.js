@@ -240,7 +240,7 @@ describe("Auth Routes Testing", function() {
         it("Global State", function(done) {
             request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)
-                expect(parsedbody.longitude).to.equal("Good");
+                expect(parsedbody.globalState).to.equal("Good");
                 done();
              })
         })
