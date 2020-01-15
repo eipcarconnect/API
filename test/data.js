@@ -6,18 +6,39 @@ const jwt = require("jsonwebtoken");
 const config = require('../config/database');
 let server;
 let token;
+let newUser;
 
 describe("Data routes test", function() {
     before(function (done) {
-        request.post("http://localhost:3000/auth/signup").form({
+        // request.post("http://localhost:3000/auth/signup").form({
+        //             name: "testnamedonotuse",
+        //             password: "testpassworddonotuse123",
+        //             email: "testemaildonotuse@gmail.com",
+        //             birthdate: "1998-10-08"
+        //         }).on('response', function(response) {
+        //             token = jwt.sign(newUser.toJSON(), config.secret);
+        //             done();
+        //         });
+        bcrypt.hash("testpassworddonotuse123", 10, function(err, hash) {
+            newUser = new User({
+                name: "testnamedonotuse",
+                email: "testemaildonotuse@gmail.com",
+                password: hash,
+                id: uniqid(),
+                birthdate: moment().format("1998-10-08")
+            });
+            newUser.save(function(err, user) {
+                request.post("http://localhost:3000/auth/signup").form({
                     name: "testnamedonotuse",
                     password: "testpassworddonotuse123",
                     email: "testemaildonotuse@gmail.com",
                     birthdate: "1998-10-08"
                 }).on('response', function(response) {
-                    token = jwt.sign(newUser.toJSON(), config.secret);
+                    expect(response.statusCode).to.equal(400);
                     done();
-                });
+                })
+            })
+        })
     })
 
     describe("Get Vehicue Infos", function () {
