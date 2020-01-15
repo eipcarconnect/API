@@ -8,7 +8,6 @@ let server;
 let token;
 
 describe("Data routes test", function() {
-    before()
     describe("Get Vehicue Infos", function () {
         it("Success", function() {
             User.deleteOne({email: "testemaildonotuse@gmail.com"}, function(err) {

@@ -4,7 +4,7 @@
   "description": "The api of the project",
   "main": "main.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --timeout 10000",
     "start": "node main.js"
   },
   "repository": {
