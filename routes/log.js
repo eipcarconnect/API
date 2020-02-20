@@ -22,7 +22,7 @@ function (message, level, file)
         minutes = "0" + minutes;
     let seconds = date.getSeconds();
     if (seconds < 10)
-        seconds = "0" + secondes;
+        seconds = "0" + seconds;
 
     let error = "[" + day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds + "] [" + level + "] [" + file + "] " + message ; 
     
