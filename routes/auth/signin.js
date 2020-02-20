@@ -65,11 +65,11 @@ const log = require('../log');
 module.exports = 
 function (req, res) {
 	if (!req.body) {
-		log("Body is empty", "INFO");
+		log("Body is empty", "INFO", "signin.js");
 		res.status(400);
 		res.json({ success: false, error: 'BodyEmpty' });
 	} else if (!req.body.email || !req.body.password) {
-		log("Missing argument", "INFO");
+		log("Missing argument", "INFO", "signin.js");
 		console.log(req.body);
 		res.status(400);
 		res.json({ success: false, error: 'MissingArgument' });
@@ -78,22 +78,22 @@ function (req, res) {
 			email: req.body.email
 		}, function (err, user) {
 			if (err) 
-			log(err, "ERROR");
+			log(err, "ERROR", "signin.js");
 	
 			if (!user) {
-				log("User not found", "INFO");
+				log("User not found", "INFO", "signin.js");
 				res.status(404).send({ success: false, error: 'UserNotFound' });
 			} else {
 				// check if password matches
 				bcrypt.compare(req.body.password, user.password, function(err, isMatch) {
 					if (isMatch) {
-						log("User successfuly connected", "INFO");
+						log("User successfuly connected", "INFO", "signin.js");
 						// if user is found and password is right create a token
 						var token = jwt.sign(user.toJSON(), config.secret);
 						// return the information including token as JSON
 						res.json({ success: true, token: 'JWT ' + token });
 					} else {
-						log("Wrong Password used", "INFO");
+						log("Wrong Password used", "INFO", "signin.js");
 						res.status(404).send({ success: false, error: 'WrongPassword' });
 					}
 				});

@@ -71,18 +71,18 @@ const bcrypt = require('bcrypt');
 module.exports = 
 function (req, res) {
 	if (!req.body) {
-		log("Body is empty", "INFO");
+		log("Body is empty", "INFO", "edit.js");
 		res.status(400);
 		return res.json({ success: false, error: 'BodyEmpty' });
 	} else if (!req.body.token) {
-		log("Missing arguments", "INFO");
+		log("Missing arguments", "INFO", "edit.js");
 		console.log(req.body);
 		res.status(400);
 		return res.json({ success: false, error: 'MissingArgument' });
 	} else {
 		jwt.verify(req.body.token, config.secret, function(err, decoded){
 			if (err) {
-				log("Invalid Token", "INFO");
+				log("Invalid Token", "INFO", "edit.js");
 				res.status(400);
 				return res.json({ success: false, error: 'InvalidToken' });
 			}
@@ -91,7 +91,7 @@ function (req, res) {
                     email: decoded.email
                 }, function(err, user) {
                     if (err) {
-                        log(err, "ERROR");
+                        log(err, "ERROR", "edit.js");
                         res.status(500);
                         return res.json({success: false, error: 'ApiInternalError'});
                     }
@@ -116,7 +116,7 @@ function (req, res) {
                         let reg = new RegExp("(?=.*[A-z])(?=.*[0-9])(?=.{8,})");
                         
                         if (!reg.test(req.body.password)) {
-                            log("Password is weak", "INFO");
+                            log("Password is weak", "INFO", "edit.js");
                             res.status(400);
                             return res.json({success: false, error: 'PasswordIsWeak'});
                         }
@@ -126,11 +126,11 @@ function (req, res) {
                                 user.password = hash;
                                 user.save(function(err, user) {
                                     if (err) {
-                                        log(err, "ERROR");
+                                        log(err, "ERROR", "edit.js");
                                         res.status(500);
                                         return res.json({success: false, error: 'APIInternalError'});
                                     }
-                                    log(user, 'ERROR');
+                                    log(user, 'ERROR', "edit.js");
 
                                     res.status(200);
                                     return res.json({ success: true, msg: "Information successfully modified"});
@@ -142,11 +142,11 @@ function (req, res) {
                     {
                         user.save(function(err, user) {
                             if (err) {
-                                log(err, "ERROR");
+                                log(err, "ERROR", "edit.js");
                                 res.status(500);
                                 return res.json({success: false, error: 'APIInternalError'});
                             }
-                            log(user, 'INFO');
+                            log(user, 'INFO', "edit.js");
                             res.status(200);
                             return res.json({ success: true, msg: "Information successfully modified"});
                         });
