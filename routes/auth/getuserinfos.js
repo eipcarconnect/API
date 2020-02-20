@@ -75,7 +75,7 @@ function (req, res) {
                     email: decoded.email
                 }, function(err, user) {
                     if (!user) {
-                        log(err, "ERROR", "getuserinfo.js");
+                        log("Invalid Token !", "ERROR", "getuserinfo.js");
                         res.status(500);
                         return res.json({success: false, error: 'InvalidToken'});
 					}

@@ -24,7 +24,7 @@ function (message, level, file)
     if (seconds < 10)
         seconds = "0" + secondes;
 
-    let error = "[" + day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds + "] [" + level + "] " + message; 
+    let error = "[" + day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds + "] [" + level + "] [" + file + "] " + message ; 
     
     console.log(error);
     fs.appendFile('log.txt', error + "\n", function (err) {
