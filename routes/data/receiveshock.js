@@ -59,18 +59,18 @@ const User = require('../../models/user');
 module.exports = 
 function (req, res) {
 	if (!req.body) {
-		log("Body is empty", "INFO", "getvehiculeinfo.js");
+		log("Body is empty", "INFO", "receiveshock.js");
 		res.status(400);
 		return res.json({ success: false, error: 'BodyEmpty' });
 	} else if (!req.body.token) {
-		log("Body is empty", "INFO", "getvehiculeinfo.js");
+		log("Body is empty", "INFO", "receiveshock.js");
 		console.log(req.body);
 		res.status(400);
 		return res.json({ success: false, error: 'MissingArgument' });
 	} else {
 		jwt.verify(req.body.token, config.secret, function(err, decoded){
 			if (err) {
-				log("Invalid Token", "INFO", "getvehiculeinfo.js");
+				log("Invalid Token", "INFO", "receiveshock.js");
 				res.status(400);
 				return res.json({ success: false, error: 'InvalidToken' });
 			}
@@ -79,21 +79,14 @@ function (req, res) {
                     email: decoded.email
                 }, function(err, user) {
                     if (!user) {
-                        log("Invalid Token", "ERROR", "getvehiculeinfo.js");
+                        log("Invalid Token", "ERROR", "receiveshock.js");
                         res.status(500);
                         return res.json({success: false, error: 'InvalidToken'});
 					}
 					else {
-						log("Vehicule Info successfully retrieved", "INFO", "getvehiculeinfo.js");
-						res.status(200);
-						return res.json({ 
-							success: true, 
- 							speed: 10, 
- 							fuel: 45,
- 							latitude: 46.510492,
-							longitude: 3.533891,
-							globalState: "Good"
-						});
+						log("Shock notification sent", "INFO", "receiveshock.js");
+						res.status(201);
+						return res;
 					}
 				});
 				
