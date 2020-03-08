@@ -86,7 +86,7 @@ function (req, res) {
 					else {
 						log("Shock notification sent", "INFO", "receiveshock.js");
 						res.status(201);
-						return res;
+						return res.json({});
 					}
 				});
 				
