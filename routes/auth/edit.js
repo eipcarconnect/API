@@ -19,7 +19,7 @@ const bcrypt = require('bcrypt');
  *     HTTP/1.1 200 OK
  *     {
  *			"success": true, 
- *			"msg" : "Information successfully modified"
+ *			"token" : "NewTokenHere"
  *     }
  *
  * @apiError MissingArgument An argument of the request is missing
@@ -90,7 +90,7 @@ function (req, res) {
                 User.findOne({
                     email: decoded.email
                 }, function(err, user) {
-                    if (err) {
+                    if (err ||!user) {
                         log(err, "ERROR", "edit.js");
                         res.status(500);
                         return res.json({success: false, error: 'ApiInternalError'});
@@ -133,7 +133,8 @@ function (req, res) {
                                     log(user, 'ERROR', "edit.js");
 
                                     res.status(200);
-                                    return res.json({ success: true, msg: "Information successfully modified"});
+                                    let token = jwt.sign(user.toJSON(), config.secret);
+                                    return res.json({ success: true, token: token});
                                 });
                             });
                         }
@@ -148,7 +149,8 @@ function (req, res) {
                             }
                             log(user, 'INFO', "edit.js");
                             res.status(200);
-                            return res.json({ success: true, msg: "Information successfully modified"});
+                            let token = jwt.sign(user.toJSON(), config.secret);
+                            return res.json({ success: true, token: token});
                         });
                     }
                 })
