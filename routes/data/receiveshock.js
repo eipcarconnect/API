@@ -2,6 +2,7 @@ const config = require('../../config/database');
 const jwt = require('jsonwebtoken');
 const log = require('../log');
 const User = require('../../models/user');
+const firebaseAdmin = require("firebase-admin");
 
 /**
  * @api {post} /data/receiveshock Get Vehicule Info
@@ -79,11 +80,31 @@ function (req, res) {
                         res.status(500);
                         return res.json({success: false, error: 'InvalidToken'});
 					}
-					else {
+					if (!user.registrationToken) {
+						log("Missing Registration Token", "ERROR", "receiveshock.js");
+						res.status(500);
+                        return res.json({success: false, error: 'Missing Registration Token'});
+					}	
+					let message = {
+						notification: {
+							title: "Collision détecté",
+							body: "Une collision sur votre véhicule à été détecté"
+						}
+					}
+					firebaseAdmin.messaging().send(message).then((response) => {
 						log("Shock notification sent", "INFO", "receiveshock.js");
+
 						res.status(201);
 						return res.json({success: true, msg : "Shock notification sent"});
-					}
+					}).catch((error) => {
+						log("Error when sending notification", "ERROR", "receiveshock.js");
+						res.status(500);
+						return res.json({success: true, msg : "Error when sending notification"});
+						
+					})
+						
+					
+					
 				});
 				
 			}

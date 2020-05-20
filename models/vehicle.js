@@ -6,27 +6,22 @@ var VehicleSchema = new Schema({
         type: String,
         required: true
 	},
-	lastPosition: {
-		type: Object,
+	speed: {
+		type: Number,
 		required: false
 	},
-	lastSeen: {
+	fuel: {
 		type: Date,
 		required: false
 	},
-	id: {
+	lattitude: {
 		type: String,
 		required: false
 	},
-	data: {
-		type: Object,
-		required: false
-	},
-	lastCollision: {
+	longitude: {
 		type: Object,
 		required: false
 	}
-	
 })
 
 module.exports = mongoose.model('Vehicle', VehicleSchema);
