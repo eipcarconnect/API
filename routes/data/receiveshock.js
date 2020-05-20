@@ -89,7 +89,8 @@ function (req, res) {
 						notification: {
 							title: "Collision détecté",
 							body: "Une collision sur votre véhicule à été détecté"
-						}
+						},
+						token: user.registrationToken
 					}
 					firebaseAdmin.messaging().send(message).then((response) => {
 						log("Shock notification sent", "INFO", "receiveshock.js");
