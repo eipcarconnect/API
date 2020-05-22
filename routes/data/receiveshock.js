@@ -5,18 +5,12 @@ const User = require('../../models/user');
 const firebaseAdmin = require("firebase-admin");
 
 /**
- * @api {post} /data/receiveshock Get Vehicule Info
+ * @api {post} /data/receiveshock Receive Shock 
  * @apiName Receive Shock
  * @apiGroup Data
  *
  * @apiParam {String} token The user token
  *
- * @apiSuccess {Boolean} success true
- * @apiSuccess {String} speed  The speed is sent in km/h
- * @apiSuccess {String} fuel  The fuel is sent in %
- * @apiSuccess {String} latitude  The latitude of the vehicule
- * @apiSuccess {String} longitude  The longitude of the vehicule
- * @apiSuccess {String} latitude  The latitude of the vehicule
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -51,6 +45,15 @@ const firebaseAdmin = require("firebase-admin");
  * 	 "success": false,
  *       "error": "Invalid Token"
  *     }
+ *  
+ * @apiError MissingRegistrationToken You must use the registration token route first
+ *
+ * @apiErrorExample Missing Registration Token:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "MissingRegistrationToken"
+ *     }
  */
 
 module.exports = 
@@ -77,13 +80,13 @@ function (req, res) {
                 }, function(err, user) {
                     if (!user) {
                         log("Invalid Token", "ERROR", "receiveshock.js");
-                        res.status(500);
+                        res.status(400);
                         return res.json({success: false, error: 'InvalidToken'});
 					}
 					if (!user.registrationToken) {
 						log("Missing Registration Token", "ERROR", "receiveshock.js");
-						res.status(500);
-                        return res.json({success: false, error: 'Missing Registration Token'});
+						res.status(400);
+                        return res.json({success: false, error: 'MissingRegistrationToken'});
 					}	
 					let message = {
 						notification: {

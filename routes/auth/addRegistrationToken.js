@@ -3,6 +3,61 @@ const jwt = require('jsonwebtoken');
 const log = require('../log');
 const User = require('../../models/user');
 
+/**
+ * @api {post} /auth/addregistrationtoken Add Registration Token
+ * @apiName Add Registration Token
+ * @apiGroup Auth
+ *
+ * @apiParam {String} token The user token
+ * @apiParam {String} registrationToken The registration Token
+ *
+ * @apiSuccess {Boolean} success true
+ * @apiSuccess {String} msg   Message of success
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *			"success": true, 
+ *			"msg": "The token was added sucessfully"
+ *     }
+ *
+ * @apiError MissingArgument An argument of the request is missing
+ *
+ * @apiErrorExample MissingArgument:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "MissingArgument"
+ *     }
+ * 
+ * @apiError BodyEmpty The Body of the Request is empty
+ *
+ * @apiErrorExample BodyEmpty:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "BodyEmpty"
+ *     }
+ * 
+ * @apiError InvalidToken The token provided is invalid
+ *
+ * @apiErrorExample InvalidToken:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "InvalidToken"
+ *     }
+ * 
+ * @apiError ApiInternalError There was an internal error in the API
+ *
+ * @apiErrorExample ApiInternalError:
+ *     HTTP/1.1 500 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "ApiInternalError"
+ *     }
+ */
+
 module.exports = 
 function (req, res) {
 	if (!req.body) {

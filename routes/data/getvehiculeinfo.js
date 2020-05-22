@@ -88,8 +88,8 @@ function (req, res) {
 						res.status(200);
 						return res.json({ 
 							success: true, 
- 							speed: 10, 
- 							fuel: 45,
+ 							speed: Math.floor(Math.random() * 100), 
+ 							fuel: Math.floor(Math.random() * 100),
  							latitude: 46.510492,
 							longitude: 3.533891,
 							globalState: "Good"

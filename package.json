@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "mocha --timeout 10000",
-    "start": "node main.js"
+    "start": "node main.js",
+    "doc" : "node doc.js"
   },
   "repository": {
     "type": "git",

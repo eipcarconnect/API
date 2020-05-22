@@ -208,21 +208,6 @@ describe("Auth Routes Testing", function() {
             })
             
         })
-        it("Speed", function(done) {
-            request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
-                let parsedbody = JSON.parse(body)
-                console.log(parsedbody);
-                expect(parsedbody.speed).to.equal(10);
-                done();
-             })
-        })
-        it("Fuel", function(done) {
-            request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
-                let parsedbody = JSON.parse(body)
-                expect(parsedbody.fuel).to.equal(45);
-                done();
-             })
-        })
         it("Latitude", function(done) {
             request.post({url:'http://localhost:3000/data/getvehiculeinfo', form: {token: token}}, function(err,httpResponse,body){ 
                 let parsedbody = JSON.parse(body)

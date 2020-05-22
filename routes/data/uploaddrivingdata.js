@@ -4,18 +4,16 @@ const log = require('../log');
 const User = require('../../models/user');
 
 /**
- * @api {post} /data/uploaddrivingdata Upload vehicule infos
- * @apiName Get Vehicule Info
+ * @api {post} /data/uploaddrivingdata Upload Driving Data
+ * @apiName Upload Driving Data
  * @apiGroup Data
  *
  * @apiParam {String} token The user token
- *
- * @apiSuccess {Boolean} success true
- * @apiSuccess {String} speed  The speed is sent in km/h
- * @apiSuccess {String} fuel  The fuel is sent in %
- * @apiSuccess {String} latitude  The latitude of the vehicle
- * @apiSuccess {String} longitude  The longitude of the vehicle
- * @apiSuccess {String} latitude  The latitude of the vehicle
+ * @apiParam {String} speed  The speed is sent in km/h
+ * @apiParam {String} fuel  The fuel is sent in %
+ * @apiParam {String} latitude  The latitude of the vehicle
+ * @apiParam {String} longitude  The longitude of the vehicle
+ * @apiParam {String} latitude  The latitude of the vehicle
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
