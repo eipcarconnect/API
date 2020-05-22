@@ -88,6 +88,7 @@ function (req, res) {
 						res.status(400);
                         return res.json({success: false, error: 'MissingRegistrationToken'});
 					}	
+					console.log(user.registrationToken);
 					let message = {
 						notification: {
 							title: "Collision détecté",
