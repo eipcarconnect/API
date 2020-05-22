@@ -61,7 +61,7 @@ const User = require('../../models/user');
 module.exports = 
 function (req, res) {
 	if (!req.body) {
-		log("Body is empty", "INFO", "getvehiculeinfo.js");
+		log("Body is empty", "INFO", "addRegistrationToken.js");
 		res.status(400);
 		return res.json({ success: false, error: 'BodyEmpty' });
 	} else if (!req.body.token || !req.body.registrationToken) {
@@ -72,7 +72,7 @@ function (req, res) {
 	} else {
 		jwt.verify(req.body.token, config.secret, function(err, decoded){
 			if (err) {
-				log("Invalid Token", "INFO", "getvehiculeinfo.js");
+				log("Invalid Token", "INFO", "addRegistrationToken.js");
 				res.status(400);
 				return res.json({ success: false, error: 'InvalidToken' });
 			}
@@ -81,17 +81,22 @@ function (req, res) {
                     email: decoded.email
                 }, function(err, user) {
                     if (!user) {
-                        log("Invalid Token", "ERROR", "getvehiculeinfo.js");
+                        log("Invalid Token", "ERROR", "addRegistrationToken");
                         res.status(500);
                         return res.json({success: false, error: 'InvalidToken'});
 					}
 					else {
 						user.registrationToken = req.body.registrationToken;
 						user.save(function(err, user) {
-							if (err) 
-								return console.debug(err);
-							else 
+							if (err) {
+								res.status(500);
+								log("Error when saving user", "ERROR", "addRegistrationToken.js");
+								res.json({success: false, error: 'ApiInternalError'});
+							}
+							else {
+								log("Registration Token sucessfully added", "INFO", "addRegistrationToken.js");
 								return res.status(200).json({success: true, msg: "The token was added sucessfully"});
+							}
 						})
 					}
 				});
