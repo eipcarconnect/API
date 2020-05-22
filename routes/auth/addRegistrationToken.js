@@ -9,7 +9,7 @@ const User = require('../../models/user');
  * @apiGroup Auth
  *
  * @apiParam {String} token The user token
- * @apiParam {String} registrationToken The registration Token
+ * @apiParam {Object} registrationToken The registration Token
  *
  * @apiSuccess {Boolean} success true
  * @apiSuccess {String} msg   Message of success

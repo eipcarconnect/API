@@ -27,7 +27,7 @@ var UserSchema = new Schema({
 		required: true
 	},
 	registrationToken:  {
-		type: String,
+		type: Object,
 		required: false
 	}
 })
