@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var PermissionSchema = new Schema({
-    id: {
+    idUser: {
         type: String,
         required: true
 	},

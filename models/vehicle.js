@@ -6,20 +6,32 @@ var VehicleSchema = new Schema({
         type: String,
         required: true
 	},
+	model: {
+		type: String,
+		required: false
+	},
 	speed: {
 		type: Number,
 		required: false
 	},
 	fuel: {
-		type: Date,
+		type: Number,
 		required: false
 	},
-	lattitude: {
-		type: String,
+	battery: {
+		type: Number,
+		required : false
+	},
+	latitude: {
+		type: Number,
 		required: false
 	},
 	longitude: {
-		type: Object,
+		type: Number,
+		required: false
+	},
+	globalState: {
+		type: String,
 		required: false
 	}
 })

@@ -5,7 +5,7 @@ const User = require('../../models/user');
 const Vehicle = require('../../models/vehicle');
 
 /**
- * @api {post} /data/getvehiculeinfo Get Vehicule Info
+ * @api {post} /data/getownedvehicles Get Vehicule Info
  * @apiName Get Vehicule Info
  * @apiGroup Data
  *
@@ -60,18 +60,18 @@ const Vehicle = require('../../models/vehicle');
 module.exports = 
 function (req, res) {
 	if (!req.body) {
-		log("Body is empty", "INFO", "getvehiculeinfo.js");
+		log("Body is empty", "INFO", "getownedvehicles.js");
 		res.status(400);
 		return res.json({ success: false, error: 'BodyEmpty' });
 	} else if (!req.body.token) {
-		log("Body is empty", "INFO", "getvehiculeinfo.js");
+		log("Body is empty", "INFO", "getownedvehicles.js");
 		console.log(req.body);
 		res.status(400);
 		return res.json({ success: false, error: 'MissingArgument' });
 	} else {
 		jwt.verify(req.body.token, config.secret, function(err, decoded){
 			if (err) {
-				log("Invalid Token", "INFO", "getvehiculeinfo.js");
+				log("Invalid Token", "INFO", "getownedvehicles.js");
 				res.status(400);
 				return res.json({ success: false, error: 'InvalidToken' });
 			}
@@ -80,27 +80,22 @@ function (req, res) {
                     email: decoded.email
                 }, function(err, user) {
                     if (!user) {
-                        log("Invalid Token", "ERROR", "getvehiculeinfo.js");
+                        log("Invalid Token", "ERROR", "getownedvehicles.js");
                         res.status(500);
                         return res.json({success: false, error: 'InvalidToken'});
 					}
 					else {
-						Vehicle.findOne({
+						Vehicle.find ({
 							ownerId: decoded._id
-						}, function(err,vehicle) {
+						}, function(err,vehicles) {
 							if (err)
 								res.status(500).send();
-							if (vehicle) {
-								log("Vehicule Info successfully retrieved", "INFO", "getvehiculeinfo.js");
+							if (vehicles) {
+								log("Vehicule Info successfully retrieved", "INFO", "getownedvehicles.js");
 								res.status(200);
 								return res.json({ 
 									success: true, 
-									speed: vehicle.speed, 
-									fuel: vehicle.fuel,
-									battery: vehicle.battery,
-									latitude: vehicle.latitude,
-									longitude: vehicle.longitude,
-									globalState: vehicle.globalState
+									vehicles: vehicles
 								});
 							}
 							else {
@@ -115,21 +110,16 @@ function (req, res) {
 								})
 								newVehicle.save(function(err, saved) {
 									if (err) {
-										log(err, "ERROR", "getvehiculeinfo.js");
+										log(err, "ERROR", "getownedvehicles.js");
 										res.status(500);
 										return res.json({success: false, error: 'APIInternalError'});
 									}
-									log("Vehicle created", "INFO", "getvehiculeinfo.js");
+									log("Vehicle created", "INFO", "getownedvehicles.js");
 									console.log(saved);
 									res.status(200);
 									return res.json({ 
 										success: true, 
-										speed: saved.speed, 
-										fuel: saved.fuel,
-										battery: saved.battery,
-										latitude: saved.latitude,
-										longitude: saved.longitude,
-										globalState: saved.globalState
+										vehicles: [saved]
 									});
 								});
 
