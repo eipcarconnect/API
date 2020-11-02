@@ -16,6 +16,7 @@ const log = require('../log');
  * @apiParam {String} username Users unique email.
  * @apiParam {String} password Users password.
  * @apiParam {String} birthdate Users birthdate written in YYYY-MM-DD format.
+ * @apiParam {String} company The company name must already exist.
  *
  * @apiSuccess {Boolean} success true
  * @apiSuccess {String} token  The token needed to access authenticated page

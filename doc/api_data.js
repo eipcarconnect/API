@@ -471,6 +471,13 @@ define({ "api": [
             "optional": false,
             "field": "birthdate",
             "description": "<p>Manager birthdate written in YYYY-MM-DD format.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "company",
+            "description": "<p>The company name must be unique.</p>"
           }
         ]
       }
@@ -725,6 +732,13 @@ define({ "api": [
             "optional": false,
             "field": "birthdate",
             "description": "<p>Users birthdate written in YYYY-MM-DD format.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "company",
+            "description": "<p>The company name must already exist.</p>"
           }
         ]
       }
