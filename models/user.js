@@ -26,9 +26,13 @@ var UserSchema = new Schema({
 		type: Date,
 		required: true
 	},
-	registrationToken:  {
+	registrationToken: {
 		type: Object,
 		required: false
+	},
+	company: {
+    	type: String,
+		required: true
 	}
 })
 

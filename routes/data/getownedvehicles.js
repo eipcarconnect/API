@@ -5,8 +5,8 @@ const User = require('../../models/user');
 const Vehicle = require('../../models/vehicle');
 
 /**
- * @api {post} /data/getownedvehicles Get Vehicule Info
- * @apiName Get Vehicule Info
+ * @api {post} /data/getownedvehicles Get Owned Vehicle
+ * @apiName Get Owned Vehicle List
  * @apiGroup Data
  *
  * @apiParam {String} token The user token

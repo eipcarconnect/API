@@ -61,7 +61,7 @@ const log = require('../log');
  * 	 "success": false,
  *       "error": "PasswordIsWeak"
  *     }
- * @apiError APIInternalError An error occured within the API pleace contat the admin
+ * @apiError APIInternalError An error occured within the API please contact the admin
  *
  * @apiErrorExample APIInternalError:
  *     HTTP/1.1 500 Internal Error
@@ -77,7 +77,7 @@ function(req, res) {
 		log("Body is empty", "INFO", "signup.js");
 		res.status(400);
 		res.json({success: false, error: 'BodyEmpty'});
-	} else if (!req.body.name || !req.body.email || !req.body.password || !req.body.birthdate) {
+	} else if (!req.body.name || !req.body.email || !req.body.password || !req.body.birthdate || !req.body.company) {
 		log("Missing argument", "INFO", "signup.js");
 		res.status(400);
 		res.json({success: false, error: 'MissingArgument'});
@@ -100,13 +100,16 @@ function(req, res) {
 					return res.json({success: false, error: 'PasswordIsWeak'});
 				}
 				log("Creating New User", "INFO", "signup.js");
+
+				// TODO Vérifier que la company existe
 				bcrypt.hash(req.body.password, 10, function(err, hash) {
-					var newUser = new User({
+					let newUser = new User({
 						name: req.body.name,
 						email: req.body.email,
 						password: hash,
 						id: uniqid(),
-						birthdate: moment().format(req.body.birthdate)
+						birthdate: moment().format(req.body.birthdate),
+						company: req.body.company
 					});
 					
 		
@@ -116,11 +119,11 @@ function(req, res) {
 							res.status(500);
 							return res.json({success: false, error: 'APIInternalError'});
 						}
-						log("User created with sucess", "INFO", "signup.js");
+						log("User created with success", "INFO", "signup.js");
 						res.status(200);
-						var token = jwt.sign(user.toJSON(), config.secret);
+						let token = jwt.sign(user.toJSON(), config.secret);
 						// return the information including token as JSON
-						res.json({ success: true, token: 'JWT ' + token });
+						res.json({ success: true, token: token });
 					});
 				  });		
 			}
