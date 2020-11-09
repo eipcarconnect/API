@@ -40,7 +40,14 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohan\Documents\Code\Epitech\API\routes\auth\user" />
+      <recent name="C:\Users\Mohan\Documents\Code\Epitech\API\routes\auth\manager" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -56,6 +63,9 @@
       <workItem from="1604233114687" duration="2733000" />
       <workItem from="1604262470696" duration="672000" />
       <workItem from="1604343947931" duration="9473000" />
+      <workItem from="1604590737869" duration="1282000" />
+      <workItem from="1604828552347" duration="13536000" />
+      <workItem from="1604951064443" duration="3427000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,8 @@
-const config = require('../../config/database');
+const config = require('../../../config/database');
 const jwt = require('jsonwebtoken');
-const log = require('../log');
-const User = require('../../models/user');
+const log = require('../../log');
+const User = require('../../../models/user');
+const Manager = require('../../../models/manager');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 
@@ -13,7 +14,7 @@ const bcrypt = require('bcrypt');
  * @apiParam {String} token The user token
  *
  * @apiSuccess {Boolean} success true
- * @apiSuccess {String} msg   Message of success
+ * @apiSuccess {String} token The new Token generated
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -89,12 +90,26 @@ function (req, res) {
 			else {
                 User.findOne({
                     email: decoded.email
-                }, function(err, user) {
+                }, async function(err, user) {
                     if (err ||!user) {
                         log(err, "ERROR", "edit.js");
                         res.status(500);
                         return res.json({success: false, error: 'ApiInternalError'});
                     }
+
+                    if (req.body.company && req.body.company != "")
+                    {
+                        let manager = await Manager.findOne({
+                            company: req.body.company
+                        });
+                        if (!manager)
+                        {
+                            res.status(400);
+                            return res.json({success: false, error: 'CompanyNotFound'});
+                        }
+
+                    }
+
 
                     if (req.body.email && req.body.email != "") 
                     {

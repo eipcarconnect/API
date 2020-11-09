@@ -2,36 +2,28 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var VehicleSchema = new Schema({
-    ownerId: {
+    company: {
         type: String,
         required: true
 	},
-	model: {
-		type: String,
+	breakPressed: {
+		type: Boolean,
+		required: false
+	},
+	clutchPressed: {
+		type: Boolean,
 		required: false
 	},
 	speed: {
 		type: Number,
 		required: false
 	},
-	fuel: {
-		type: Number,
-		required: false
-	},
-	battery: {
+	tempCoolant: {
 		type: Number,
 		required : false
 	},
-	latitude: {
+	tempEngine: {
 		type: Number,
-		required: false
-	},
-	longitude: {
-		type: Number,
-		required: false
-	},
-	globalState: {
-		type: String,
 		required: false
 	}
 })

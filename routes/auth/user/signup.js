@@ -1,11 +1,12 @@
 
-const User = require('../../models/user');
+const User = require('../../../models/user');
 const jwt = require('jsonwebtoken');
-const config = require('../../config/database');
+const config = require('../../../config/database');
 const uniqid = require('uniqid');
 const bcrypt = require('bcrypt');
 const moment = require('moment')
-const log = require('../log');
+const log = require('../../log');
+const Manager = require('../../../models/manager');
 
 /**
  * @api {post} /auth/signup SignUp a new User
@@ -13,7 +14,7 @@ const log = require('../log');
  * @apiGroup Auth
  *
  * @apiParam {String} name User last name and first name.
- * @apiParam {String} username Users unique email.
+ * @apiParam {String} email Users unique email.
  * @apiParam {String} password Users password.
  * @apiParam {String} birthdate Users birthdate written in YYYY-MM-DD format.
  * @apiParam {String} company The company name must already exist.
@@ -70,6 +71,12 @@ const log = require('../log');
  * 	 "success": false,
  *       "error": "APIInternalError"
  *     }
+ * @apiErrorExample CompanyNotFound:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "CompanyNotFound"
+ *     }
  */
 
 module.exports = 
@@ -85,13 +92,26 @@ function(req, res) {
 	} else {
 		User.findOne({
 			email: req.body.email
-		}, function(err, user) {
+		}, async function(err, user) {
 			if (user) {
 				res.status(400);
 				log("User already exist", "INFO", "signup.js");
 				return res.json({success: false, error: 'UserAlreadyExist'});
 			}
 			else {
+
+				let manager = await Manager.findOne({
+					company: req.body.company
+				});
+
+				if (!manager)
+				{
+					res.status(400);
+					log("CompanyNotFound", "INFO", "signup.js");
+					return res.json({success: false, error: "CompanyNotFound"});
+				}
+
+
 
 				let reg = new RegExp("(?=.*[A-z])(?=.*[0-9])(?=.{8,})");
 				

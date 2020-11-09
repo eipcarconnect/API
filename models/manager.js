@@ -10,10 +10,6 @@ var ManagerSchema = new Schema({
         type: String,
         required: true
     },
-    permissionId: {
-        type: Array,
-        required: false
-    },
     email: {
         type: String,
         required: true
@@ -25,10 +21,6 @@ var ManagerSchema = new Schema({
     birthdate: {
         type: Date,
         required: true
-    },
-    registrationToken: {
-        type: Object,
-        required: false
     },
     company: {
         type: String,

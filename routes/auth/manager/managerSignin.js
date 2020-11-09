@@ -1,9 +1,9 @@
-const Manager = require('../../models/manager');
+const Manager = require('../../../models/manager');
 const jwt = require('jsonwebtoken');
-const config = require('../../config/database');
+const config = require('../../../config/database');
 const uniqid = require('uniqid');
 const bcrypt = require('bcrypt');
-const log = require('../log');
+const log = require('../../log');
 
 /**
  * @api {post} /auth/manager/signin SignIn a Manager

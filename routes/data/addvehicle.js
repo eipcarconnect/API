@@ -1,11 +1,11 @@
 const config = require('../../config/database');
 const jwt = require('jsonwebtoken');
 const log = require('../log');
-const User = require('../../models/user');
+const Manager = require('../../models/manager');
 const Vehicle = require('../../models/vehicle');
 
 /**
- * @api {post} /data/addownedvehicle Get Vehicule Info
+ * @api {post} /data/manager/addvehicle Get Vehicule Info
  * @apiName Get Vehicule Info
  * @apiGroup Data
  *
@@ -60,18 +60,18 @@ const Vehicle = require('../../models/vehicle');
 module.exports = 
 function (req, res) {
 	if (!req.body) {
-		log("Body is empty", "INFO", "addownedvehicle.js");
+		log("Body is empty", "INFO", "addvehicle.js");
 		res.status(400);
 		return res.json({ success: false, error: 'BodyEmpty' });
 	} else if (!req.body.token) {
-		log("Body is empty", "INFO", "addownedvehicle.js");
+		log("Body is empty", "INFO", "addvehicle.js");
 		console.log(req.body);
 		res.status(400);
 		return res.json({ success: false, error: 'MissingArgument' });
 	} else {
 		jwt.verify(req.body.token, config.secret, function(err, decoded){
 			if (err) {
-				log("Invalid Token", "INFO", "addownedvehicle.js");
+				log("Invalid Token", "INFO", "addvehicle.js");
 				res.status(400);
 				return res.json({ success: false, error: 'InvalidToken' });
 			}
@@ -80,28 +80,23 @@ function (req, res) {
                     email: decoded.email
                 }, function(err, user) {
                     if (!user) {
-                        log("Invalid Token", "ERROR", "addownedvehicle.js");
+                        log("Invalid Token", "ERROR", "addvehicle.js");
                         res.status(500);
                         return res.json({success: false, error: 'InvalidToken'});
 					}
 					else {
 						
 						let newVehicle = new Vehicle({
-							ownerId: decoded._id,
-							speed: Math.floor(Math.random() * 100), 
-							fuel: Math.floor(Math.random() * 100),
-							battery:Math.floor(Math.random() * 100),
-							latitude: 46.510492,
-							longitude: 3.533891,
-							globalState: "Good"
+							company: decoded.company,
+
 						})
 						newVehicle.save(function(err, saved) {
 							if (err) {
-								log(err, "ERROR", "addownedvehicle.js");
+								log(err, "ERROR", "addvehicle.js");
 								res.status(500);
 								return res.json({success: false, error: 'APIInternalError'});
 							}
-							log("Vehicle created", "INFO", "addownedvehicle.js");
+							log("Vehicle created", "INFO", "addvehicle.js");
 							console.log(saved);
 							res.status(200);
 							return res.json({ 

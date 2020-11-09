@@ -1,7 +1,7 @@
-const config = require('../../config/database');
+const config = require('../../../config/database');
 const jwt = require('jsonwebtoken');
-const log = require('../log');
-const User = require('../../models/user');
+const log = require('../../log');
+const User = require('../../../models/user');
 
 /**
  * @api {post} /auth/getuserinfos Get User Infos
@@ -14,6 +14,7 @@ const User = require('../../models/user');
  * @apiSuccess {String} name  The name of the user
  * @apiSuccess {String} email  The email address of the user
  * @apiSuccess {String} birthdate  The birthdate of the user
+ * @apiSuccess {String} company The company of the user
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -21,7 +22,8 @@ const User = require('../../models/user');
  *			"success: true, 
  *			"name": "name", 
  *			"email": "emailaddress",
- *			"birthdate": "YYYY-MM-DDTHH:MM:SS.000Z"
+ *			"birthdate": "YYYY-MM-DDTHH:MM:SS.000Z",
+ *			"company": "company name"
  *     }
  *
  * @apiError MissingArgument An argument of the request is missing
@@ -86,7 +88,8 @@ function (req, res) {
 							success: true, 
 							name: user.name, 
 							email: user.email,
-							birthdate: user.birthdate
+							birthdate: user.birthdate,
+							company: user.company
 						});
 					}
 				});

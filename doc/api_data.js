@@ -1289,7 +1289,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "routes/data/addownedvehicle.js",
+    "filename": "routes/data/addvehicle.js",
     "groupTitle": "Data"
   },
   {

@@ -1,10 +1,10 @@
-const Manager = require('../../models/manager');
+const Manager = require('../../../models/manager');
 const jwt = require('jsonwebtoken');
-const config = require('../../config/database');
+const config = require('../../../config/database');
 const uniqid = require('uniqid');
 const bcrypt = require('bcrypt');
 const moment = require('moment')
-const log = require('../log');
+const log = require('../../log');
 
 /**
  * @api {post} /auth/manager/signup SignUp a new Manager
@@ -12,7 +12,7 @@ const log = require('../log');
  * @apiGroup Auth
  *
  * @apiParam {String} name Manager last name and first name.
- * @apiParam {String} username Manager unique email.
+ * @apiParam {String} email Manager unique email.
  * @apiParam {String} password Manager password.
  * @apiParam {String} birthdate Manager birthdate written in YYYY-MM-DD format.
  * @apiParam {String} company The company name must be unique.
@@ -91,7 +91,10 @@ module.exports =
             res.json({success: false, error: 'MissingArgument'});
         } else {
             Manager.findOne({
-                email: req.body.email
+                $or: [
+                    { 'email': req.body.email },
+                    { 'company': req.body.company }
+                ]
             }, function(err, manager) {
                 if (manager) {
                     res.status(400);

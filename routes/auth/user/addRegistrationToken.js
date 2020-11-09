@@ -1,7 +1,7 @@
-const config = require('../../config/database');
+const config = require('../../../config/database');
 const jwt = require('jsonwebtoken');
-const log = require('../log');
-const User = require('../../models/user');
+const log = require('../../log');
+const User = require('../../../models/user');
 
 /**
  * @api {post} /auth/addregistrationtoken Add Registration Token
