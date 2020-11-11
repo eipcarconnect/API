@@ -1263,29 +1263,8 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "speed",
-            "description": "<p>The speed is sent in km/h</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "fuel",
-            "description": "<p>The fuel is sent in %</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "latitude",
-            "description": "<p>The latitude of the vehicule</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "longitude",
-            "description": "<p>The longitude of the vehicule</p>"
+            "field": "company",
+            "description": "<p>An array of company</p>"
           }
         ]
       },

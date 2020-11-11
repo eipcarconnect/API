@@ -9,11 +9,7 @@ const Manager = require('../../models/manager');
  *
  *
  * @apiSuccess {Boolean} success true
- * @apiSuccess {String} speed  The speed is sent in km/h
- * @apiSuccess {String} fuel  The fuel is sent in %
- * @apiSuccess {String} latitude  The latitude of the vehicule
- * @apiSuccess {String} longitude  The longitude of the vehicule
- * @apiSuccess {String} latitude  The latitude of the vehicule
+ * @apiSuccess {String} company An array of company
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
