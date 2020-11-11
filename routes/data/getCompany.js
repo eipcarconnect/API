@@ -19,11 +19,10 @@ const Manager = require('../../models/manager');
  *     HTTP/1.1 200 OK
  *     {
  *			"success: true,
- *			"speed": "10",
- *			"fuel": "45",
- *			"latitude": "46.510492",
- *			"longitude": "3.533891",
- *			"globalState": "Good"
+ *			"company": [
+ *			 "Total",
+ *			 "Fromage"
+ *			]
  *     }
  *
  * @apiError APIInternalError An error occured within the API please contact the admin

@@ -1292,7 +1292,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"speed\": \"10\",\n\t\t\t\"fuel\": \"45\",\n\t\t\t\"latitude\": \"46.510492\",\n\t\t\t\"longitude\": \"3.533891\",\n\t\t\t\"globalState\": \"Good\"\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"company\": [\n\t\t\t \"Total\",\n\t\t\t \"Fromage\"\n\t\t\t]\n    }",
           "type": "json"
         }
       ]
