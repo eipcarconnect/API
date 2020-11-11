@@ -25,6 +25,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
   <component name="ProjectId" id="1iaYSnE0sO1FZRagO9jN8pAmwTd" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -33,7 +36,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/routes/data/user" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -44,9 +47,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohan\Documents\Code\Epitech\API\routes\data\user" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohan\Documents\Code\Epitech\API\notusedroutes" />
+      <recent name="C:\Users\Mohan\Documents\Code\Epitech\API\routes\data\manager" />
+      <recent name="C:\Users\Mohan\Documents\Code\Epitech\API\routes\data\user" />
+      <recent name="C:\Users\Mohan\Documents\Code\Epitech\API\routes\data" />
       <recent name="C:\Users\Mohan\Documents\Code\Epitech\API\routes\auth\user" />
-      <recent name="C:\Users\Mohan\Documents\Code\Epitech\API\routes\auth\manager" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -65,7 +74,8 @@
       <workItem from="1604343947931" duration="9473000" />
       <workItem from="1604590737869" duration="1282000" />
       <workItem from="1604828552347" duration="13536000" />
-      <workItem from="1604951064443" duration="3427000" />
+      <workItem from="1604951064443" duration="4617000" />
+      <workItem from="1605094147209" duration="5670000" />
     </task>
     <servers />
   </component>
@@ -77,5 +87,16 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="478" y="11" width="579" height="801" key="find.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1604347116417" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/models/vehicle.js</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

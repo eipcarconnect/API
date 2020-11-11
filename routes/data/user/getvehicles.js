@@ -2,23 +2,32 @@ const config = require('../../../config/database');
 const jwt = require('jsonwebtoken');
 const log = require('../../log');
 const User = require('../../../models/user');
+const Vehicle = require('../../../models/vehicle');
 
 /**
- * @api {post} /auth/addregistrationtoken Add Registration Token
- * @apiName Add Registration Token
- * @apiGroup Auth
+ * @api {post} /data/user/getvehicles Get Vehicle User
+ * @apiName Get Vehicles
+ * @apiGroup Data
  *
  * @apiParam {String} token The user token
- * @apiParam {Object} registrationToken The registration Token
  *
  * @apiSuccess {Boolean} success true
- * @apiSuccess {String} msg   Message of success
+ * @apiSuccess {Array} vehicles An array of vehicles belonging to the company
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *			"success": true, 
- *			"msg": "The token was added sucessfully"
+ *			"success: true, 
+ *			"vehicles": [
+	 *			 {
+	 *			    company: "Total",
+					speed: 200,
+					breakPressed: false,
+					clutchPressed: false,
+					tempCoolant: 20,
+					tempEngine: 60
+	 *			 }
+ *			]
  *     }
  *
  * @apiError MissingArgument An argument of the request is missing
@@ -41,38 +50,29 @@ const User = require('../../../models/user');
  * 
  * @apiError InvalidToken The token provided is invalid
  *
- * @apiErrorExample InvalidToken:
+ * @apiErrorExample Invalid Token:
  *     HTTP/1.1 400 Bad Request
  *     {
  * 	 "success": false,
- *       "error": "InvalidToken"
- *     }
- * 
- * @apiError ApiInternalError There was an internal error in the API
- *
- * @apiErrorExample ApiInternalError:
- *     HTTP/1.1 500 Bad Request
- *     {
- * 	 "success": false,
- *       "error": "ApiInternalError"
+ *       "error": "Invalid Token"
  *     }
  */
 
 module.exports = 
 function (req, res) {
 	if (!req.body) {
-		log("Body is empty", "INFO", "addRegistrationToken.js");
+		log("Body is empty", "INFO", "getvehicles.js");
 		res.status(400);
 		return res.json({ success: false, error: 'BodyEmpty' });
-	} else if (!req.body.token || !req.body.registrationToken) {
-		log("Body is empty", "INFO", "getvehiculeinfo.js");
+	} else if (!req.body.token) {
+		log("Body is empty", "INFO", "getvehicles.js");
 		console.log(req.body);
 		res.status(400);
 		return res.json({ success: false, error: 'MissingArgument' });
 	} else {
 		jwt.verify(req.body.token, config.secret, function(err, decoded){
 			if (err) {
-				log("Invalid Token", "INFO", "addRegistrationToken.js");
+				log("Invalid Token", "INFO", "getvehicles.js");
 				res.status(400);
 				return res.json({ success: false, error: 'InvalidToken' });
 			}
@@ -81,26 +81,27 @@ function (req, res) {
                     email: decoded.email
                 }, function(err, user) {
                     if (!user) {
-                        log("Invalid Token", "ERROR", "addRegistrationToken");
+                        log("Invalid Token", "ERROR", "getvehicles.js");
                         res.status(500);
                         return res.json({success: false, error: 'InvalidToken'});
 					}
 					else {
-						user.registrationToken = req.body.registrationToken;
-						user.save(function(err, user) {
-							if (err) {
-								res.status(500);
-								log("Error when saving user", "ERROR", "addRegistrationToken.js");
-								res.json({success: false, error: 'ApiInternalError'});
-							}
-							else {
-								log("Registration Token sucessfully added", "INFO", "addRegistrationToken.js");
-								return res.status(200).json({success: true, msg: "The token was added sucessfully"});
+						Vehicle.find ({
+							company: user.company
+						}, function(err,vehicles) {
+							if (err)
+								res.status(500).send();
+							if (vehicles) {
+								log("Vehicule Info successfully retrieved", "INFO", "getvehicles.js");
+								res.status(200);
+								return res.json({ 
+									success: true, 
+									vehicles: vehicles
+								});
 							}
 						})
 					}
 				});
-				
 			}
 		});
 	}

@@ -1,8 +1,8 @@
-const config = require('../../config/database');
+const config = require('../config/database');
 const jwt = require('jsonwebtoken');
-const log = require('../log');
-const User = require('../../models/user');
-const Vehicle = require('../../models/vehicle');
+const log = require('../routes/log');
+const User = require('../models/user');
+const Vehicle = require('../models/vehicle');
 
 /**
  * @api {post} /data/getvehiculeinfo Get Vehicule Info

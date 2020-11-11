@@ -4,7 +4,7 @@ const signup = require('./auth/user/signup.js');
 const signin = require('./auth/user/signin.js');
 const getuserinfos = require('./auth/user/getuserinfos.js');
 const edit = require('./auth/user/edit.js');
-const addregistrationtoken = require('./auth/user/addRegistrationToken');
+//const addregistrationtoken = require('../notusedroutes/addRegistrationToken');
 const managerSignup = require('./auth/manager/managerSignup');
 const managerSignin = require('./auth/manager/managerSignin');
 const managerGetInfo = require('./auth/manager/getinfo');
@@ -18,7 +18,7 @@ router.route('/signin').post(signin);
 
 router.route('/getuserinfos').post(getuserinfos);
 
-router.route('/addregistrationtoken').post(addregistrationtoken);
+//router.route('/addregistrationtoken').post(addregistrationtoken);
 
 router.route('/manager/signup').post(managerSignup);
 

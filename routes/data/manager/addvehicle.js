@@ -1,27 +1,24 @@
-const config = require('../../config/database');
+const config = require('../../../config/database');
 const jwt = require('jsonwebtoken');
-const log = require('../log');
-const User = require('../../models/user');
-const Permission = require('../../models/permission');
+const log = require('../../log');
+const Manager = require('../../../models/manager');
+const Vehicle = require('../../../models/vehicle');
 
 /**
- * @api {post} /data/addpermission Add Permission between User and Vehicles
- * @apiName Add Per
+ * @api {post} /data/manager/addvehicle Add Vehicle
+ * @apiName Add Vehicle
  * @apiGroup Data
  *
- * @apiParam {String} token The user token
- * @apiParam {String} idUser The user id whow ants to have the permission
- * @apiParam {String} idVehicle the id of the vehicle
- * @apiParam {bool} seeLastSeen Does the user has permission to see when the vehicle was last seen ?
- * @apiParam {bool} seePosition Does the user has permission to see where the vehicle is ?
- * @apiParam {bool} seeData Does the user has permission to dee the data of the vehicle ?
+ * @apiParam {String} token The manager token
  *
  * @apiSuccess {Boolean} success true
+ * @apiSuccess {String} msg The message of the vehicle
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *			"success: true, 
+ *			"success": true,
+ *			msg: "Vehicle created with success"
  *     }
  *
  * @apiError MissingArgument An argument of the request is missing
@@ -55,51 +52,52 @@ const Permission = require('../../models/permission');
 module.exports = 
 function (req, res) {
 	if (!req.body) {
-		log("Body is empty", "INFO", "addpermission.js");
+		log("Body is empty", "INFO", "addvehicle.js");
 		res.status(400);
 		return res.json({ success: false, error: 'BodyEmpty' });
-	} else if (!req.body.token || !req.body.idUser || !req.body.idVehicle) {
-		log("Body is empty", "INFO", "addpermission.js");
+	} else if (!req.body.token) {
+		log("Missing Token", "INFO", "addvehicle.js");
 		console.log(req.body);
 		res.status(400);
 		return res.json({ success: false, error: 'MissingArgument' });
 	} else {
 		jwt.verify(req.body.token, config.secret, function(err, decoded){
 			if (err) {
-				log("Invalid Token", "INFO", "addpermission.js");
+				log("Invalid Token", "INFO", "addvehicle.js");
 				res.status(400);
 				return res.json({ success: false, error: 'InvalidToken' });
 			}
 			else {
-				User.findOne({
+				Manager.findOne({
                     email: decoded.email
-                }, function(err, user) {
-                    if (!user) {
-                        log("Invalid Token", "ERROR", "addpermission.js");
+                }, function(err, manager) {
+                    if (!manager) {
+                        log("Invalid Token", "ERROR", "addvehicle.js");
                         res.status(500);
                         return res.json({success: false, error: 'InvalidToken'});
 					}
 					else {
 						
-						let newPermission = new Permission({
-                            idUser: req.body.idUser,
-                            idVehicle: req.body.idVehicle,
-                            seeLastSeen: req.body.seeLastSeen,
-                            seePosition: req.body.seePosition,
-                            seeData: req.body.seeData
+						let newVehicle = new Vehicle({
+							company: manager.company,
+							speed: Math.floor(Math.random() * 100),
+							breakPressed: false,
+							clutchPressed: false,
+							tempCoolant: Math.floor(Math.random() * 100),
+							tempEngine: Math.floor(Math.random() * 100)
 						})
-						newPermission.save(function(err, saved) {
+						newVehicle.save(function(err, saved) {
 							if (err) {
-								log(err, "ERROR", "addpermission.js");
+								log(err, "ERROR", "addvehicle.js");
 								res.status(500);
 								return res.json({success: false, error: 'APIInternalError'});
 							}
-							log("Permission created", "INFO", "addpermission.js");
+							log("Vehicle created", "INFO", "addvehicle.js");
 							console.log(saved);
 							res.status(200);
 							return res.json({ 
 								success: true, 
-								msg: "Permission created with success"
+								msg: "Vehicle created with success"
 							});
 						});
 
