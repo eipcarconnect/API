@@ -20,6 +20,7 @@ const Vehicle = require('../../../models/vehicle');
  *			"success: true, 
  *			"vehicles": [
  *			 {
+ *			 	_id: "id",
  *			  	company: "Total",
  *			    model: "Tesla Model 3",
  *				speed: 200,
