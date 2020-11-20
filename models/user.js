@@ -22,10 +22,6 @@ var UserSchema = new Schema({
 		type: String,
 		required: true
 	},
-	birthdate: {
-		type: Date,
-		required: true
-	},
 	registrationToken: {
 		type: Object,
 		required: false

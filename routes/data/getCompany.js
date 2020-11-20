@@ -3,7 +3,7 @@ const log = require('../log');
 const Manager = require('../../models/manager');
 
 /**
- * @api {get} /data/getcompany Get List of created Company
+ * @api {get} /data/company Get List of created Company
  * @apiName Get Vehicule Info
  * @apiGroup Data
  *

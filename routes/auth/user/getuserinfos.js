@@ -13,7 +13,6 @@ const User = require('../../../models/user');
  * @apiSuccess {Boolean} success true
  * @apiSuccess {String} name  The name of the user
  * @apiSuccess {String} email  The email address of the user
- * @apiSuccess {String} birthdate  The birthdate of the user
  * @apiSuccess {String} company The company of the user
  *
  * @apiSuccessExample Success-Response:
@@ -22,7 +21,6 @@ const User = require('../../../models/user');
  *			"success: true, 
  *			"name": "name", 
  *			"email": "emailaddress",
- *			"birthdate": "YYYY-MM-DDTHH:MM:SS.000Z",
  *			"company": "company name"
  *     }
  *
@@ -88,7 +86,6 @@ function (req, res) {
 							success: true, 
 							name: user.name, 
 							email: user.email,
-							birthdate: user.birthdate,
 							company: user.company
 						});
 					}

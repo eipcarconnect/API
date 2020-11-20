@@ -10,6 +10,7 @@ const Vehicle = require('../../../models/vehicle');
  * @apiGroup Data
  *
  * @apiParam {String} token The manager token
+ * @apiParam {String} model The model of the vehicle
  *
  * @apiSuccess {Boolean} success true
  * @apiSuccess {String} msg The message of the vehicle
@@ -55,8 +56,8 @@ function (req, res) {
 		log("Body is empty", "INFO", "addvehicle.js");
 		res.status(400);
 		return res.json({ success: false, error: 'BodyEmpty' });
-	} else if (!req.body.token) {
-		log("Missing Token", "INFO", "addvehicle.js");
+	} else if (!req.body.token || !req.body.model) {
+		log("Missing Arguments", "INFO", "addvehicle.js");
 		console.log(req.body);
 		res.status(400);
 		return res.json({ success: false, error: 'MissingArgument' });
@@ -84,7 +85,8 @@ function (req, res) {
 							breakPressed: false,
 							clutchPressed: false,
 							tempCoolant: Math.floor(Math.random() * 100),
-							tempEngine: Math.floor(Math.random() * 100)
+							tempEngine: Math.floor(Math.random() * 100),
+							model: req.body.model
 						})
 						newVehicle.save(function(err, saved) {
 							if (err) {

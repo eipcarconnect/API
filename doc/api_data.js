@@ -159,13 +159,6 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "birthdate",
-            "description": "<p>The birthdate of the manager</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
             "field": "company",
             "description": "<p>The company of the manager</p>"
           }
@@ -174,7 +167,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"name\": \"name\",\n\t\t\t\"email\": \"email@address\",\n\t\t\t\"birthdate\": \"YYYY-MM-DDTHH:MM:SS.000Z\",\n\t\t    \"company\": \"company name\"\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"name\": \"name\",\n\t\t\t\"email\": \"email@address\",\n\t\t    \"company\": \"company name\"\n    }",
           "type": "json"
         }
       ]
@@ -271,13 +264,6 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "birthdate",
-            "description": "<p>The birthdate of the user</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
             "field": "company",
             "description": "<p>The company of the user</p>"
           }
@@ -286,7 +272,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"name\": \"name\", \n\t\t\t\"email\": \"emailaddress\",\n\t\t\t\"birthdate\": \"YYYY-MM-DDTHH:MM:SS.000Z\",\n\t\t\t\"company\": \"company name\"\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"name\": \"name\", \n\t\t\t\"email\": \"emailaddress\",\n\t\t\t\"company\": \"company name\"\n    }",
           "type": "json"
         }
       ]
@@ -474,13 +460,6 @@ define({ "api": [
             "optional": false,
             "field": "password",
             "description": "<p>Manager password.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "birthdate",
-            "description": "<p>Manager birthdate written in YYYY-MM-DD format.</p>"
           },
           {
             "group": "Parameter",
@@ -740,13 +719,6 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "birthdate",
-            "description": "<p>Users birthdate written in YYYY-MM-DD format.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
             "field": "company",
             "description": "<p>The company name must already exist.</p>"
           }
@@ -972,6 +944,125 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/data/user/addride",
+    "title": "Add Ride",
+    "name": "Add_Ride",
+    "group": "Data",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>The user token</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The id of the vehicle</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "start",
+            "description": "<p>The start address of the ride</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "end",
+            "description": "<p>The end of the ride</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The name of the ride</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>The message of success</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success\": true,\n\t\t\tmsg: \"Ride created with success\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MissingArgument",
+            "description": "<p>An argument of the request is missing</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BodyEmpty",
+            "description": "<p>The Body of the Request is empty</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>The token provided is invalid</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "MissingArgument:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"MissingArgument\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "BodyEmpty:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"BodyEmpty\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "Invalid Token:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"Invalid Token\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/data/user/addRide.js",
+    "groupTitle": "Data"
+  },
+  {
+    "type": "post",
     "url": "/data/manager/addvehicle",
     "title": "Add Vehicle",
     "name": "Add_Vehicle",
@@ -985,6 +1076,13 @@ define({ "api": [
             "optional": false,
             "field": "token",
             "description": "<p>The manager token</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "model",
+            "description": "<p>The model of the vehicle</p>"
           }
         ]
       }
@@ -1102,7 +1200,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t    company: \"Total\",\n\t\t\t\t\tspeed: 200,\n\t\t\t\t\tbreakPressed: false,\n\t\t\t\t\tclutchPressed: false,\n\t\t\t\t\ttempCoolant: 20,\n\t\t\t\t\ttempEngine: 60\n\t\t\t }\n\t\t\t]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    model: \"Tesla Model 3\",\n\t\t\t\tspeed: 200,\n\t\t\t\tbreakPressed: false,\n\t\t\t\tclutchPressed: false,\n\t\t\t\ttempCoolant: 20,\n\t\t\t\ttempEngine: 60\n\t\t\t }\n\t\t\t]\n    }",
           "type": "json"
         }
       ]
@@ -1193,7 +1291,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t    company: \"Total\",\n\t\t\t\t\tspeed: 200,\n\t\t\t\t\tbreakPressed: false,\n\t\t\t\t\tclutchPressed: false,\n\t\t\t\t\ttempCoolant: 20,\n\t\t\t\t\ttempEngine: 60\n\t\t\t }\n\t\t\t]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    model: \"Tesla Model 3\",\n\t\t\t\tspeed: 200,\n\t\t\t\tbreakPressed: false,\n\t\t\t\tclutchPressed: false,\n\t\t\t\ttempCoolant: 20,\n\t\t\t\ttempEngine: 60\n\t\t\t }\n\t\t\t]\n    }\n    }",
           "type": "json"
         }
       ]
@@ -1245,7 +1343,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/data/getcompany",
+    "url": "/data/company",
     "title": "Get List of created Company",
     "name": "Get_Vehicule_Info",
     "group": "Data",

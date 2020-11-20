@@ -75,7 +75,9 @@
       <workItem from="1604590737869" duration="1282000" />
       <workItem from="1604828552347" duration="13536000" />
       <workItem from="1604951064443" duration="4617000" />
-      <workItem from="1605094147209" duration="7117000" />
+      <workItem from="1605094147209" duration="8912000" />
+      <workItem from="1605361603005" duration="2926000" />
+      <workItem from="1605862592445" duration="5982000" />
     </task>
     <servers />
   </component>
@@ -87,16 +89,5 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="478" y="11" width="579" height="801" key="find.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1604347116417" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/models/vehicle.js</url>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

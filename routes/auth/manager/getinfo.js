@@ -13,7 +13,6 @@ const Manager = require('../../../models/manager');
  * @apiSuccess {Boolean} success true
  * @apiSuccess {String} name  The name of the manager
  * @apiSuccess {String} email  The email address of the manager
- * @apiSuccess {String} birthdate  The birthdate of the manager
  * @apiSuccess {String} company The company of the manager
  *
  * @apiSuccessExample Success-Response:
@@ -22,7 +21,6 @@ const Manager = require('../../../models/manager');
  *			"success: true,
  *			"name": "name",
  *			"email": "email@address",
- *			"birthdate": "YYYY-MM-DDTHH:MM:SS.000Z",
  *		    "company": "company name"
  *     }
  *
@@ -88,7 +86,6 @@ module.exports =
                                 success: true,
                                 name: user.name,
                                 email: user.email,
-                                birthdate: user.birthdate,
                                 company: user.company
                             });
                         }

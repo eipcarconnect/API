@@ -14,7 +14,6 @@ const log = require('../../log');
  * @apiParam {String} name Manager last name and first name.
  * @apiParam {String} email Manager unique email.
  * @apiParam {String} password Manager password.
- * @apiParam {String} birthdate Manager birthdate written in YYYY-MM-DD format.
  * @apiParam {String} company The company name must be unique.
  *
  * @apiSuccess {Boolean} success true
@@ -85,7 +84,7 @@ module.exports =
             log("Body is empty", "ERROR", "managerSignup.js");
             res.status(400);
             res.json({success: false, error: 'BodyEmpty'});
-        } else if (!req.body.name || !req.body.email || !req.body.password || !req.body.birthdate || !req.body.company) {
+        } else if (!req.body.name || !req.body.email || !req.body.password || !req.body.company) {
             log("Missing argument", "ERROR", "managerSignup.js");
             res.status(400);
             res.json({success: false, error: 'MissingArgument'});
@@ -125,7 +124,6 @@ module.exports =
                                 email: req.body.email,
                                 password: hash,
                                 id: uniqid(),
-                                birthdate: moment().format(req.body.birthdate),
                                 company: req.body.company
                             });
 

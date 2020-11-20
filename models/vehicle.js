@@ -6,6 +6,10 @@ var VehicleSchema = new Schema({
         type: String,
         required: true
 	},
+	model: {
+    	type: String,
+		required: true
+	},
 	breakPressed: {
 		type: Boolean,
 		required: false

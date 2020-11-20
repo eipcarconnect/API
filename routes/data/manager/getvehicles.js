@@ -19,14 +19,15 @@ const Vehicle = require('../../../models/vehicle');
  *     {
  *			"success: true, 
  *			"vehicles": [
-	 *			 {
-	 *			    company: "Total",
-					speed: 200,
-					breakPressed: false,
-					clutchPressed: false,
-					tempCoolant: 20,
-					tempEngine: 60
-	 *			 }
+ *			 {
+ *			  	company: "Total",
+ *			    model: "Tesla Model 3",
+ *				speed: 200,
+ *				breakPressed: false,
+ *				clutchPressed: false,
+ *				tempCoolant: 20,
+ *				tempEngine: 60
+ *			 }
  *			]
  *     }
  *

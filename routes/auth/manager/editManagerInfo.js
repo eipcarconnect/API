@@ -125,11 +125,6 @@ module.exports =
                             manager.name = req.body.name;
                         }
 
-                        if (req.body.birthdate && req.body.birthdate != "")
-                        {
-                            manager.birthdate = moment().format(req.body.birthdate);
-                        }
-
                         if (req.body.password && req.body.password != "")
                         {
                             let reg = new RegExp("(?=.*[A-z])(?=.*[0-9])(?=.{8,})");

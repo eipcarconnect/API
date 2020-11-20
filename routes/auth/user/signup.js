@@ -16,7 +16,6 @@ const Manager = require('../../../models/manager');
  * @apiParam {String} name User last name and first name.
  * @apiParam {String} email Users unique email.
  * @apiParam {String} password Users password.
- * @apiParam {String} birthdate Users birthdate written in YYYY-MM-DD format.
  * @apiParam {String} company The company name must already exist.
  *
  * @apiSuccess {Boolean} success true
@@ -85,7 +84,7 @@ function(req, res) {
 		log("Body is empty", "INFO", "signup.js");
 		res.status(400);
 		res.json({success: false, error: 'BodyEmpty'});
-	} else if (!req.body.name || !req.body.email || !req.body.password || !req.body.birthdate || !req.body.company) {
+	} else if (!req.body.name || !req.body.email || !req.body.password || !req.body.company) {
 		log("Missing argument", "INFO", "signup.js");
 		res.status(400);
 		res.json({success: false, error: 'MissingArgument'});
@@ -122,14 +121,12 @@ function(req, res) {
 				}
 				log("Creating New User", "INFO", "signup.js");
 
-				// TODO Vérifier que la company existe
 				bcrypt.hash(req.body.password, 10, function(err, hash) {
 					let newUser = new User({
 						name: req.body.name,
 						email: req.body.email,
 						password: hash,
 						id: uniqid(),
-						birthdate: moment().format(req.body.birthdate),
 						company: req.body.company
 					});
 					
