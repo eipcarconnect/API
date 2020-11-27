@@ -6,10 +6,6 @@ var UserSchema = new Schema({
         type: String,
         required: true
 	},
-	id: {
-		type: String,
-		required: true
-	},
 	permissionId: {
 		type: Array,
 		required: false

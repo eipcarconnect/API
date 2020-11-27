@@ -2,7 +2,6 @@
 const User = require('../../../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('../../../config/database');
-const uniqid = require('uniqid');
 const bcrypt = require('bcrypt');
 const moment = require('moment')
 const log = require('../../log');
@@ -126,7 +125,6 @@ function(req, res) {
 						name: req.body.name,
 						email: req.body.email,
 						password: hash,
-						id: uniqid(),
 						company: req.body.company
 					});
 					
