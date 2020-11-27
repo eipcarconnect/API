@@ -985,6 +985,13 @@ define({ "api": [
             "optional": false,
             "field": "name",
             "description": "<p>The name of the ride</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "date",
+            "description": "<p>The date of the ride</p>"
           }
         ]
       }

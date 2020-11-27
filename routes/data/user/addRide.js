@@ -15,6 +15,7 @@ const moment = require('moment')
  * @apiParam {String} start The start address of the ride
  * @apiParam {String} end The end of the ride
  * @apiParam {String} name The name of the ride
+ * @apiParam {String} date The date of the ride
  *
  * @apiSuccess {Boolean} success true
  * @apiSuccess {String} msg The message of success
@@ -60,7 +61,7 @@ module.exports =
             log("Body is empty", "INFO", "addRide.js");
             res.status(400);
             return res.json({ success: false, error: 'BodyEmpty' });
-        } else if (!req.body.token || !req.body.id || !req.body.start || !req.body.end || !req.body.name) {
+        } else if (!req.body.token || !req.body.id || !req.body.start || !req.body.end || !req.body.name || !req.body.date) {
             log("Missing Arguments", "INFO", "addRide.js");
             console.log(req.body);
             res.status(400);
@@ -90,7 +91,7 @@ module.exports =
                                 vehicleId: req.body.id,
                                 start: req.body.start,
                                 end: req.body.end,
-                                date: moment().format("DD/MM/YYYY")
+                                date: req.body.date
                             })
                             newRide.save(function(err, saved) {
                                 if (err) {
