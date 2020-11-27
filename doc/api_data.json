@@ -1284,7 +1284,7 @@
             "type": "Array",
             "optional": false,
             "field": "rides",
-            "description": "<p>An array of rides belonging to the company</p>"
+            "description": "<p>An array of rides belonging to the user</p>"
           }
         ]
       },

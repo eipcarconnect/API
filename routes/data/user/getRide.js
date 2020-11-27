@@ -12,7 +12,7 @@ const User = require('../../../models/user');
  * @apiParam {String} token The user token
  *
  * @apiSuccess {Boolean} success true
- * @apiSuccess {Array} rides An array of rides belonging to the company
+ * @apiSuccess {Array} rides An array of rides belonging to the user
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
