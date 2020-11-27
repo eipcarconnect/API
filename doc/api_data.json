@@ -1200,7 +1200,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"rides\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t\tvehicleId: \"id\",\n\t\t\t\tuser: \"Jean\",\n\t\t\t\tstart: \"start address\",\n\t\t\t\tend: \"end address\"\n\t\t\t }\n\t\t\t]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"rides\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t\tvehicleId: \"id\",\n\t\t\t\tuser: \"Jean\",\n\t\t\t\tstart: \"start address\",\n\t\t\t\tend: \"end address\",\n\t\t\t    date: \"01/01/1998\"\n\t\t\t }\n\t\t\t]\n    }",
           "type": "json"
         }
       ]
@@ -1291,7 +1291,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"rides\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t\tvehicleId: \"id\",\n\t\t\t\tuserId: \"id\",\n\t\t\t\tstart: \"start address\",\n\t\t\t\tend: \"end address\"\n\t\t\t }\n\t\t\t]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"rides\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t\tvehicleId: \"id\",\n\t\t\t\tuserId: \"id\",\n\t\t\t\tstart: \"start address\",\n\t\t\t\tend: \"end address\",\n\t\t\t    date: \"01/01/1998\"\n\t\t\t }\n\t\t\t]\n    }",
           "type": "json"
         }
       ]

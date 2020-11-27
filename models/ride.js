@@ -25,6 +25,10 @@ var RideSchema = new Schema({
     end: {
         type: String,
         required: true
+    },
+    date: {
+        type: String,
+        required: true
     }
 })
 

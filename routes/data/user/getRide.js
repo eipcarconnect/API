@@ -26,7 +26,8 @@ const User = require('../../../models/user');
  *				vehicleId: "id",
  *				userId: "id",
  *				start: "start address",
- *				end: "end address"
+ *				end: "end address",
+ *			    date: "01/01/1998"
  *			 }
  *			]
  *     }

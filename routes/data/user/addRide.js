@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const log = require('../../log');
 const User = require('../../../models/user');
 const Ride = require('../../../models/ride');
+const moment = require('moment')
 
 /**
  * @api {post} /data/user/addride Add Ride
@@ -14,7 +15,6 @@ const Ride = require('../../../models/ride');
  * @apiParam {String} start The start address of the ride
  * @apiParam {String} end The end of the ride
  * @apiParam {String} name The name of the ride
- *
  *
  * @apiSuccess {Boolean} success true
  * @apiSuccess {String} msg The message of success
@@ -89,7 +89,8 @@ module.exports =
                                 userId: user._id,
                                 vehicleId: req.body.id,
                                 start: req.body.start,
-                                end: req.body.end
+                                end: req.body.end,
+                                date: moment().format("DD/MM/YYYY")
                             })
                             newRide.save(function(err, saved) {
                                 if (err) {
