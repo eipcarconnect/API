@@ -5,7 +5,7 @@ const Ride = require('../../../models/ride');
 const User = require('../../../models/user');
 
 /**
- * @api {post} /data/user/getrides Get Rides Manager
+ * @api {post} /data/user/getrides Get Rides User
  * @apiName Get Rides
  * @apiGroup Data
  *

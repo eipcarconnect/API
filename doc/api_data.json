@@ -1253,7 +1253,7 @@
   {
     "type": "post",
     "url": "/data/user/getrides",
-    "title": "Get Rides Manager",
+    "title": "Get Rides User",
     "name": "Get_Rides",
     "group": "Data",
     "parameter": {
