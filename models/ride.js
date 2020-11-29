@@ -10,7 +10,7 @@ var RideSchema = new Schema({
         type: String,
         required: true
     },
-    vehicleId: {
+    vehicleLicencePlate: {
         type: String,
         required: true
     },
