@@ -23,7 +23,7 @@ const User = require('../../../models/user');
  *			 	_id: "id",
  *			  	company: "Total",
  *			    name: "Meet up with a client",
- *				vehicleId: "id",
+ *				vehicle: "licence plate",
  *				userId: "id",
  *				start: "start address",
  *				end: "end address",

@@ -29,7 +29,13 @@ var VehicleSchema = new Schema({
 	tempEngine: {
 		type: Number,
 		required: false
+	},
+	licencePlate: {
+    	type: String,
+		required: true
 	}
+
+
 })
 
 module.exports = mongoose.model('Vehicle', VehicleSchema);

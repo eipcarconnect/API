@@ -27,7 +27,8 @@ const Vehicle = require('../../../models/vehicle');
  *				breakPressed: false,
  *				clutchPressed: false,
  *				tempCoolant: 20,
- *				tempEngine: 60
+ *				tempEngine: 60,
+ *				licencePlate: "licence Plate"
  *			 }
  *			]
  *     }

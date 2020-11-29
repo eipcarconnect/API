@@ -4,6 +4,7 @@ const log = require('../../log');
 const Manager = require('../../../models/manager');
 const Ride = require('../../../models/ride');
 const User = require('../../../models/user');
+const Vehicle = require('../../../models/vehicle');
 
 /**
  * @api {post} /data/manager/getrides Get Rides Manager
@@ -24,7 +25,7 @@ const User = require('../../../models/user');
  *			 	_id: "id",
  *			  	company: "Total",
  *			    name: "Meet up with a client",
- *				vehicleId: "id",
+ *				vehicle: "licence Plate",
  *				user: "Jean",
  *				start: "start address",
  *				end: "end address",
@@ -103,12 +104,12 @@ module.exports =
                                             if (user)
                                             {
                                                 delete rides[i].userId;
-                                                rides[i].user = user.name
+                                                rides[i].user = user.name;
                                             }
                                         }
                                     }
 
-                                    log("Vehicle Info successfully retrieved", "INFO", "getrides.js");
+                                    log("Ride Info successfully retrieved", "INFO", "getrides.js");
                                     res.status(200);
                                     return res.json({
                                         success: true,

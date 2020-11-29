@@ -1,20 +1,23 @@
+
+
 const config = require('../../../config/database');
 const jwt = require('jsonwebtoken');
 const log = require('../../log');
 const User = require('../../../models/user');
 const Ride = require('../../../models/ride');
+const Bill = require('../../../models/bill');
 
 /**
- * @api {post} /data/user/addRide Add Ride
- * @apiName Add Ride
+ * @api {post} /data/user/addbill Add Bill
+ * @apiName Add Bill
  * @apiGroup Data
  *
  * @apiParam {String} token The user token
- * @apiParam {String} licencePlate The licence plate of the vehicle
- * @apiParam {String} start The start address of the ride
- * @apiParam {String} end The end of the ride
- * @apiParam {String} name The name of the ride
- * @apiParam {String} date The date of the ride
+ * @apiParam {String} rideId The if of the ride
+ * @apiParam {Number} priceTTC The full price
+ * @apiParam {Number} priceHT The price without taxes
+ * @apiParam {String} name The name of the bill
+ * @apiParam {String} type The type of bill
  *
  * @apiSuccess {Boolean} success true
  * @apiSuccess {String} msg The message of success
@@ -52,6 +55,15 @@ const Ride = require('../../../models/ride');
  * 	 "success": false,
  *       "error": "Invalid Token"
  *     }
+ *
+ * @apiError InvalidToken The token provided is invalid
+ *
+ * @apiErrorExample Ride Not Found:
+ *     HTTP/1.1 404 Bad Request
+ *     {
+ * 	 "success": false,
+ *       "error": "RideNotFound"
+ *     }
  */
 
 module.exports =
@@ -60,7 +72,7 @@ module.exports =
             log("Body is empty", "INFO", "addRide.js");
             res.status(400);
             return res.json({ success: false, error: 'BodyEmpty' });
-        } else if (!req.body.token || !req.body.licencePlate || !req.body.start || !req.body.end || !req.body.name || !req.body.date) {
+        } else if (!req.body.token || !req.body.rideId || !req.body.priceTTC || !req.body.priceHT || !req.body.name || !req.body.type) {
             log("Missing Arguments", "INFO", "addRide.js");
             console.log(req.body);
             res.status(400);
@@ -75,7 +87,7 @@ module.exports =
                 else {
                     User.findOne({
                         email: decoded.email
-                    }, function(err, user) {
+                    }, async function(err, user) {
                         if (!user) {
                             log("Invalid Token", "ERROR", "addRide.js");
                             res.status(500);
@@ -83,27 +95,32 @@ module.exports =
                         }
                         else {
 
-                            let newRide = new Ride({
+                            let ride = await Ride.findById(req.body.rideId);
+                            if (!ride)
+                            {
+                                return res.status(404).json({success: false, error: 'RideNotFound'})
+                            }
+
+                            let newBill = new Bill({
                                 name: req.body.name,
-                                company: user.company,
-                                userId: user._id,
-                                vehicleLicencePlate: req.body.licencePlate,
-                                start: req.body.start,
-                                end: req.body.end,
-                                date: req.body.date
+                                company: ride.company,
+                                rideId: req.body.rideId,
+                                priceTTC: req.body.priceTTC,
+                                priceHT: req.body.priceHT,
+                                type: req.body.type
                             })
-                            newRide.save(function(err, saved) {
+                            newBill.save(function(err, saved) {
                                 if (err) {
                                     log(err, "ERROR", "addRide.js");
                                     res.status(500);
                                     return res.json({success: false, error: 'APIInternalError'});
                                 }
-                                log("Ride created", "INFO", "addRide.js");
+                                log("Bill created", "INFO", "addRide.js");
                                 console.log(saved);
                                 res.status(200);
                                 return res.json({
                                     success: true,
-                                    msg: "Ride created with success"
+                                    msg: "Bill created with success"
                                 });
                             });
 

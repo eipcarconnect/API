@@ -944,7 +944,138 @@
   },
   {
     "type": "post",
-    "url": "/data/user/addride",
+    "url": "/data/user/addbill",
+    "title": "Add Bill",
+    "name": "Add_Bill",
+    "group": "Data",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>The user token</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "rideId",
+            "description": "<p>The if of the ride</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "priceTTC",
+            "description": "<p>The full price</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "priceHT",
+            "description": "<p>The price without taxes</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The name of the bill</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>The type of bill</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>The message of success</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success\": true,\n\t\t\tmsg: \"Ride created with success\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MissingArgument",
+            "description": "<p>An argument of the request is missing</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BodyEmpty",
+            "description": "<p>The Body of the Request is empty</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>The token provided is invalid</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "MissingArgument:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"MissingArgument\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "BodyEmpty:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"BodyEmpty\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "Invalid Token:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"Invalid Token\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "Ride Not Found:",
+          "content": "    HTTP/1.1 404 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"RideNotFound\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/data/user/addBill.js",
+    "groupTitle": "Data"
+  },
+  {
+    "type": "post",
+    "url": "/data/user/addRide",
     "title": "Add Ride",
     "name": "Add_Ride",
     "group": "Data",
@@ -962,8 +1093,8 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>The id of the vehicle</p>"
+            "field": "licencePlate",
+            "description": "<p>The licence plate of the vehicle</p>"
           },
           {
             "group": "Parameter",
@@ -1090,6 +1221,13 @@
             "optional": false,
             "field": "model",
             "description": "<p>The model of the vehicle</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "licencePlate",
+            "description": "<p>The licence plate of the vehicle</p>"
           }
         ]
       }
@@ -1168,6 +1306,86 @@
   },
   {
     "type": "post",
+    "url": "/data/getbills",
+    "title": "Get Bills",
+    "name": "Get_Bills",
+    "group": "Data",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "rideId",
+            "description": "<p>The id of the Ride</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "vehicles",
+            "description": "<p>An array of vehicles belonging to the company</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"bills\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t \tname: \"name\"\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    rideId: \"id\",\n\t\t\t\tpriceTTC: 20,\n\t\t\t\tpriceHT: 15,\n\t\t\t\ttype: \"Restaurant\"\n\t\t\t }\n\t\t\t]\n    }\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MissingArgument",
+            "description": "<p>An argument of the request is missing</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BodyEmpty",
+            "description": "<p>The Body of the Request is empty</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "MissingArgument:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"MissingArgument\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "BodyEmpty:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"BodyEmpty\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/data/getBills.js",
+    "groupTitle": "Data"
+  },
+  {
+    "type": "post",
     "url": "/data/manager/getrides",
     "title": "Get Rides Manager",
     "name": "Get_Rides",
@@ -1207,7 +1425,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"rides\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t\tvehicleId: \"id\",\n\t\t\t\tuser: \"Jean\",\n\t\t\t\tstart: \"start address\",\n\t\t\t\tend: \"end address\",\n\t\t\t    date: \"01/01/1998\"\n\t\t\t }\n\t\t\t]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"rides\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t\tvehicle: \"licence Plate\",\n\t\t\t\tuser: \"Jean\",\n\t\t\t\tstart: \"start address\",\n\t\t\t\tend: \"end address\",\n\t\t\t    date: \"01/01/1998\"\n\t\t\t }\n\t\t\t]\n    }",
           "type": "json"
         }
       ]
@@ -1298,7 +1516,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"rides\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t\tvehicleId: \"id\",\n\t\t\t\tuserId: \"id\",\n\t\t\t\tstart: \"start address\",\n\t\t\t\tend: \"end address\",\n\t\t\t    date: \"01/01/1998\"\n\t\t\t }\n\t\t\t]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"rides\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t\tvehicle: \"licence plate\",\n\t\t\t\tuserId: \"id\",\n\t\t\t\tstart: \"start address\",\n\t\t\t\tend: \"end address\",\n\t\t\t    date: \"01/01/1998\"\n\t\t\t }\n\t\t\t]\n    }",
           "type": "json"
         }
       ]
@@ -1389,7 +1607,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    model: \"Tesla Model 3\",\n\t\t\t\tspeed: 200,\n\t\t\t\tbreakPressed: false,\n\t\t\t\tclutchPressed: false,\n\t\t\t\ttempCoolant: 20,\n\t\t\t\ttempEngine: 60\n\t\t\t }\n\t\t\t]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    model: \"Tesla Model 3\",\n\t\t\t\tspeed: 200,\n\t\t\t\tbreakPressed: false,\n\t\t\t\tclutchPressed: false,\n\t\t\t\ttempCoolant: 20,\n\t\t\t\ttempEngine: 60,\n\t\t\t\tlicencePlate: \"licence Plate\"\n\t\t\t }\n\t\t\t]\n    }",
           "type": "json"
         }
       ]
@@ -1480,7 +1698,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    model: \"Tesla Model 3\",\n\t\t\t\tspeed: 200,\n\t\t\t\tbreakPressed: false,\n\t\t\t\tclutchPressed: false,\n\t\t\t\ttempCoolant: 20,\n\t\t\t\ttempEngine: 60\n\t\t\t }\n\t\t\t]\n    }\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t \tlicencePlate: \"licence Plate\"\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    model: \"Tesla Model 3\",\n\t\t\t\tspeed: 200,\n\t\t\t\tbreakPressed: false,\n\t\t\t\tclutchPressed: false,\n\t\t\t\ttempCoolant: 20,\n\t\t\t\ttempEngine: 60\n\t\t\t }\n\t\t\t]\n    }\n    }",
           "type": "json"
         }
       ]
@@ -1584,6 +1802,132 @@
     },
     "version": "0.0.0",
     "filename": "routes/data/getCompany.js",
+    "groupTitle": "Data"
+  },
+  {
+    "type": "post",
+    "url": "/data/vehicle",
+    "title": "Update Vehicle info",
+    "name": "Vehicle",
+    "group": "Data",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "licencePlate",
+            "description": "<p>The licence plate of the vehicle</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "speed",
+            "description": "<p>The speed of the vehicle</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "breakPressed",
+            "description": "<p>If the break is pressed</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "clutchPressed",
+            "description": "<p>If the clutch is pressed</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "tempCoolant",
+            "description": "<p>The temperature of the Coolant</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "tempEngine",
+            "description": "<p>The temperature of the Engine</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>The message of success</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success\": true,\n\t\t\tmsg: \"Vehicle Updated with success\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MissingArgument",
+            "description": "<p>An argument of the request is missing</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BodyEmpty",
+            "description": "<p>The Body of the Request is empty</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "VehicleNotFound",
+            "description": "<p>The vehicle is not created in the database</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "MissingArgument:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"MissingArgument\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "BodyEmpty:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"BodyEmpty\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "Vehicle Not Found:",
+          "content": "    HTTP/1.1 404 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"VehicleNotFound\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/data/vehicle.js",
     "groupTitle": "Data"
   }
 ]

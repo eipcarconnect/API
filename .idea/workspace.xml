@@ -80,7 +80,9 @@
       <workItem from="1605862592445" duration="8416000" />
       <workItem from="1606143712990" duration="63000" />
       <workItem from="1606383869751" duration="1993000" />
-      <workItem from="1606478478700" duration="9168000" />
+      <workItem from="1606478478700" duration="9960000" />
+      <workItem from="1606554672446" duration="9313000" />
+      <workItem from="1606650367585" duration="10136000" />
     </task>
     <servers />
   </component>
@@ -88,6 +90,14 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="737" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606657037275">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="737" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1606657037275" />
+    <state x="-1920" y="0" width="1550" height="880" key="dock-window-1" timestamp="1606657876271">
+      <screen x="-1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="-1920" y="0" width="1550" height="880" key="dock-window-1/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1606657876271" />
     <state x="478" y="11" width="579" height="801" key="find.popup" timestamp="1604347116417">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
