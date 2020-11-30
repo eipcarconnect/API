@@ -114,7 +114,7 @@
   },
   {
     "type": "post",
-    "url": "/auth/manager/getinfos",
+    "url": "/auth/manager/getinfo",
     "title": "Get Manager Infos",
     "name": "Get_Manager_Infos",
     "group": "Auth",
@@ -1149,7 +1149,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success\": true,\n\t\t\tmsg: \"Ride created with success\"\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success\": true,\n\t\t\tride:  {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t\tvehicle: \"licence plate\",\n\t\t\t\tuserId: \"id\",\n\t\t\t\tstart: \"start address\",\n\t\t\t\tend: \"end address\",\n\t\t\t    date: \"01/01/1998\"\n\t\t\t }\n    }",
           "type": "json"
         }
       ]

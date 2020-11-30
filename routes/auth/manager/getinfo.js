@@ -4,7 +4,7 @@ const log = require('../../log');
 const Manager = require('../../../models/manager');
 
 /**
- * @api {post} /auth/manager/getinfos Get Manager Infos
+ * @api {post} /auth/manager/getinfo Get Manager Infos
  * @apiName Get Manager Infos
  * @apiGroup Auth
  *

@@ -23,7 +23,16 @@ const Ride = require('../../../models/ride');
  *     HTTP/1.1 200 OK
  *     {
  *			"success": true,
- *			msg: "Ride created with success"
+ *			ride:  {
+ *			 	_id: "id",
+ *			  	company: "Total",
+ *			    name: "Meet up with a client",
+ *				vehicle: "licence plate",
+ *				userId: "id",
+ *				start: "start address",
+ *				end: "end address",
+ *			    date: "01/01/1998"
+ *			 }
  *     }
  *
  * @apiError MissingArgument An argument of the request is missing
@@ -103,7 +112,7 @@ module.exports =
                                 res.status(200);
                                 return res.json({
                                     success: true,
-                                    msg: "Ride created with success"
+                                    ride: saved
                                 });
                             });
 
