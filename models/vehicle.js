@@ -33,6 +33,10 @@ var VehicleSchema = new Schema({
 	licencePlate: {
     	type: String,
 		required: true
+	},
+	kilometer: {
+    	type: Number,
+		required : false
 	}
 
 

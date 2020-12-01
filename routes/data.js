@@ -10,6 +10,7 @@ const getRideUser = require('./data/user/getRide');
 const vehicle = require('./data/vehicle');
 const addBillUser = require('./data/user/addBill');
 const getBills = require('./data/getBills');
+const getUsers = require('./data/manager/getUser');
 
 router.route('/company').get(getCompany);
 
@@ -30,5 +31,7 @@ router.route('/vehicle').post(vehicle);
 router.route('/user/addbill').post(addBillUser);
 
 router.route('/getbills').post(getBills);
+
+router.route('/manager/getusers').post(getUsers);
 
 module.exports = router;

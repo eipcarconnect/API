@@ -88,7 +88,8 @@ function (req, res) {
 							tempCoolant: Math.floor(Math.random() * 100),
 							tempEngine: Math.floor(Math.random() * 100),
 							model: req.body.model,
-							licencePlate: req.body.licencePlate
+							licencePlate: req.body.licencePlate,
+							kilometer: Math.floor(Math.random() * 10000)
 						})
 						newVehicle.save(function(err, saved) {
 							if (err) {
