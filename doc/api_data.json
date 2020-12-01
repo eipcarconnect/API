@@ -1568,6 +1568,97 @@
   },
   {
     "type": "post",
+    "url": "/data/manager/getusers",
+    "title": "Get Users Manager",
+    "name": "Get_Users",
+    "group": "Data",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>The manager token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "rides",
+            "description": "<p>An array of users of the company</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true,\n\t\t\t\"users\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    name: \"Meet up with a client\",\n\t\t\t }\n\t\t\t]\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MissingArgument",
+            "description": "<p>An argument of the request is missing</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BodyEmpty",
+            "description": "<p>The Body of the Request is empty</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>The token provided is invalid</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "MissingArgument:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"MissingArgument\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "BodyEmpty:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"BodyEmpty\"\n    }",
+          "type": "json"
+        },
+        {
+          "title": "Invalid Token:",
+          "content": "    HTTP/1.1 400 Bad Request\n    {\n\t \"success\": false,\n      \"error\": \"Invalid Token\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/data/manager/getUser.js",
+    "groupTitle": "Data"
+  },
+  {
+    "type": "post",
     "url": "/data/manager/getvehicles",
     "title": "Get Vehicle Manager",
     "name": "Get_Vehicles",
