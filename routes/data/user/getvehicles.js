@@ -20,15 +20,16 @@ const Vehicle = require('../../../models/vehicle');
  *			"success: true, 
  *			"vehicles": [
  *			 {
- *			 	_id: "id",
- *			 	licencePlate: "licence Plate"
- *			  	company: "Total",
- *			    model: "Tesla Model 3",
- *				speed: 200,
- *				breakPressed: false,
- *				clutchPressed: false,
- *				tempCoolant: 20,
- *				tempEngine: 60
+ *			 	_id: "id"
+ *			 	company: "Company",
+				model: "Tesla Model 3",
+				licencePlate: "TY-567-RE",
+				kilometer: 12000,
+				fuel: 55,
+				pressure: 42,
+				oil: 12,
+				battery: 72,
+				brakeUsage: 33,
  *			 }
  *			]
  *     }

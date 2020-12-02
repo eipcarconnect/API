@@ -11,11 +11,13 @@ const moment = require('moment')
  * @apiGroup Data
  *
  * @apiParam {String} licencePlate The licence plate of the vehicle
- * @apiParam {Number} speed The speed of the vehicle
- * @apiParam {Boolean} breakPressed If the break is pressed
- * @apiParam {Boolean} clutchPressed If the clutch is pressed
- * @apiParam {Number} tempCoolant The temperature of the Coolant
- * @apiParam {Number} tempEngine The temperature of the Engine
+ * @apiParam {Number} kilometer The kilometer of the vehicule
+ * @apiParam {Number} fuel Level of fuel in %
+ * @apiParam {Number} pressure The pressure of the tire in %
+ * @apiParam {Number} oil The level of the oil in %
+ * @apiParam {Number} battery The charge of the battery in %
+ * @apiParam {Number} breakUsage The break usage in %
+ *
  *
  * @apiSuccess {Boolean} success true
  * @apiSuccess {String} msg The message of success
@@ -61,7 +63,7 @@ module.exports =
             log("Body is empty", "INFO", "vehicle.js");
             res.status(400);
             return res.json({ success: false, error: 'BodyEmpty' });
-        } else if (!req.body.licencePlate || !req.body.speed || typeof(req.body.breakPressed) === 'undefined' || typeof(req.body.clutchPressed) === 'undefined' || !req.body.tempCoolant || !req.body.tempEngine) {
+        } else if (!req.body.licencePlate || !req.body.kilometer || !req.body.fuel || !req.body.pressure || !req.body.oil || !req.body.battery ||!req.body.breakUsage) {
             log("Missing Arguments", "INFO", "addRide.js");
             console.log(req.body);
             res.status(400);
@@ -76,11 +78,12 @@ module.exports =
                     return res.json({success: false, error: 'VehicleNotFound'});
                 }
                 else {
-                    vehicle.speed = req.body.speed;
-                    vehicle.breakPressed = req.body.breakPressed;
-                    vehicle.clutchPressed = req.body.clutchPressed;
-                    vehicle.tempCoolant = req.body.tempCoolant;
-                    vehicle.tempEngine = req.body.tempEngine;
+                    vehicle.kilometer = req.body.kilometer;
+                    vehicle.fuel = req.body.fuel;
+                    vehicle.pressure = req.body.pressure;
+                    vehicle.oil = req.body.oil;
+                    vehicle.battery = req.body.battery;
+                    vehicle.breakUsage = req.body.breakUsage;
 
                     vehicle.save(function(err, vehicle) {
                         if (err) {

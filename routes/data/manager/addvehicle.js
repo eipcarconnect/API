@@ -82,14 +82,14 @@ function (req, res) {
 						
 						let newVehicle = new Vehicle({
 							company: manager.company,
-							speed: Math.floor(Math.random() * 100),
-							breakPressed: false,
-							clutchPressed: false,
-							tempCoolant: Math.floor(Math.random() * 100),
-							tempEngine: Math.floor(Math.random() * 100),
 							model: req.body.model,
 							licencePlate: req.body.licencePlate,
-							kilometer: Math.floor(Math.random() * 10000)
+							kilometer: 0,
+							fuel: 0,
+							pressure: 0,
+							oil: 0,
+							battery: 0,
+							brakeUsage: 0,
 						})
 						newVehicle.save(function(err, saved) {
 							if (err) {

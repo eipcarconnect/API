@@ -10,36 +10,34 @@ var VehicleSchema = new Schema({
     	type: String,
 		required: true
 	},
-	breakPressed: {
-		type: Boolean,
-		required: false
-	},
-	clutchPressed: {
-		type: Boolean,
-		required: false
-	},
-	speed: {
-		type: Number,
-		required: false
-	},
-	tempCoolant: {
-		type: Number,
-		required : false
-	},
-	tempEngine: {
-		type: Number,
-		required: false
-	},
 	licencePlate: {
     	type: String,
 		required: true
 	},
 	kilometer: {
     	type: Number,
-		required : false
+		required : true
+	},
+	fuel: {
+    	type: Number,
+		required: true
+	},
+	pressure: {
+    	type: Number,
+		required: true
+	},
+	oil: {
+    	type: Number,
+		required: true
+	},
+	battery: {
+    	type: Number,
+		required: true
+	},
+	brakeUsage: {
+    	type: Number,
+		required: true
 	}
-
-
 })
 
 module.exports = mongoose.model('Vehicle', VehicleSchema);

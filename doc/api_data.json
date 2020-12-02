@@ -1698,7 +1698,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    model: \"Tesla Model 3\",\n\t\t\t\tspeed: 200,\n\t\t\t\tbreakPressed: false,\n\t\t\t\tclutchPressed: false,\n\t\t\t\ttempCoolant: 20,\n\t\t\t\ttempEngine: 60,\n\t\t\t\tlicencePlate: \"licence Plate\"\n\t\t\t }\n\t\t\t]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t \t_id: \"id\"\n\t\t\t \tcompany: \"Company\",\n\t\t\t\tmodel: \"Tesla Model 3\",\n\t\t\t\tlicencePlate: \"TY-567-RE\",\n\t\t\t\tkilometer: 12000,\n\t\t\t\tfuel: 55,\n\t\t\t\tpressure: 42,\n\t\t\t\toil: 12,\n\t\t\t\tbattery: 72,\n\t\t\t\tbrakeUsage: 33,\n\t\t\t }\n\t\t\t]\n    }",
           "type": "json"
         }
       ]
@@ -1789,7 +1789,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t \t_id: \"id\",\n\t\t\t \tlicencePlate: \"licence Plate\"\n\t\t\t  \tcompany: \"Total\",\n\t\t\t    model: \"Tesla Model 3\",\n\t\t\t\tspeed: 200,\n\t\t\t\tbreakPressed: false,\n\t\t\t\tclutchPressed: false,\n\t\t\t\ttempCoolant: 20,\n\t\t\t\ttempEngine: 60\n\t\t\t }\n\t\t\t]\n    }\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\t\"success: true, \n\t\t\t\"vehicles\": [\n\t\t\t {\n\t\t\t \t_id: \"id\"\n\t\t\t \tcompany: \"Company\",\n\t\t\t\tmodel: \"Tesla Model 3\",\n\t\t\t\tlicencePlate: \"TY-567-RE\",\n\t\t\t\tkilometer: 12000,\n\t\t\t\tfuel: 55,\n\t\t\t\tpressure: 42,\n\t\t\t\toil: 12,\n\t\t\t\tbattery: 72,\n\t\t\t\tbrakeUsage: 33,\n\t\t\t }\n\t\t\t]\n    }\n    }",
           "type": "json"
         }
       ]
@@ -1915,36 +1915,43 @@
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "speed",
-            "description": "<p>The speed of the vehicle</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "breakPressed",
-            "description": "<p>If the break is pressed</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "clutchPressed",
-            "description": "<p>If the clutch is pressed</p>"
+            "field": "kilometer",
+            "description": "<p>The kilometer of the vehicule</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "tempCoolant",
-            "description": "<p>The temperature of the Coolant</p>"
+            "field": "fuel",
+            "description": "<p>Level of fuel in %</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "tempEngine",
-            "description": "<p>The temperature of the Engine</p>"
+            "field": "pressure",
+            "description": "<p>The pressure of the tire in %</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "oil",
+            "description": "<p>The level of the oil in %</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "battery",
+            "description": "<p>The charge of the battery in %</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "breakUsage",
+            "description": "<p>The break usage in %</p>"
           }
         ]
       }
