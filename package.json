@@ -26,7 +26,7 @@
     "firebase-admin": "^8.12.1",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^6.1.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.6.12",
     "request": "^2.88.0",
     "uniqid": "^5.0.3"
