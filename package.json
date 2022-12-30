@@ -25,7 +25,7 @@
     "express": "^4.17.1",
     "firebase-admin": "^8.12.1",
     "jsonwebtoken": "^8.5.1",
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "moment": "^2.24.0",
     "mongoose": "^5.6.12",
     "request": "^2.88.0",
